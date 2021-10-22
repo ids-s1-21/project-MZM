@@ -20,7 +20,8 @@ And make sure to hide your code with  `echo = FALSE` unless the point you are tr
 Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
 
 ```{r load-data, echo = FALSE}
-data <- readLines("/Users/milos/Downloads/hpi-data-2016")
+library(readxl)
+data <- read_excel("happy_planet_index.xlsx")
 ```
 
 ## Presentation
