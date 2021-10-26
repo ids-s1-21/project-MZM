@@ -1,6 +1,6 @@
 Project title
 ================
-by Team name
+by MZM
 
 ## Summary
 
@@ -20,6 +20,18 @@ expectancy’ is life expectancy but is when you take in to account the
 different living standards of different groups, different incomes,
 different ethnicity and others. The data set was compiled using many
 open polls and data sets from the UN, York University and others.
+
+We have analysed our data through three categories: geographic, economic
+and mental health. The first category contains variables population,
+ecological footprint and location (continent). Our second category
+compares values using variables average well-being,happy life
+years,inequality of outcomes, inequality-adjusted life expectancy, and
+inequality-adjusted well-being.
+
+We will examine the changes within these three categories through years
+2015 to 2020 and compare specifically years 2015-2019 and 2020 to
+understand the effects of the pandemic on the countries’ happy planet
+indexes.
 
 Write-up of your project and findings go here. Think of this as the text
 of your presentation. The length should be roughly 5 minutes when read
@@ -56,6 +68,20 @@ your project.
     ## The following objects are masked from 'package:stats':
     ## 
     ##     chisq.test, fisher.test
+
+    ## Rows: 152
+    ## Columns: 11
+    ## $ hpi_rank                      <dbl> 1, NA, 3, 8, 2, 6, 10, 4, 9, NA, 12, 21,…
+    ## $ country                       <chr> "Costa Rica", "Vanuatu", "Colombia", "Sw…
+    ## $ iso                           <chr> "CRI", "VUT", "COL", "CHE", "ECU", "PAN"…
+    ## $ continent                     <dbl> 1, 8, 1, 3, 1, 1, 1, 1, 1, 1, 2, 8, 1, 3…
+    ## $ population_thousands          <dbl> 4899.336, 278.326, 48175.048, 8379.915, …
+    ## $ life_expectancy_years         <dbl> 79.7, 70.0, 76.7, 83.3, 76.4, 78.0, 74.2…
+    ## $ ladder_of_life_wellbeing_0_10 <dbl> 7.135618, 6.712810, 6.233715, 7.458520, …
+    ## $ ecological_footprint_g_ha     <dbl> 2.7101425, NA, 2.0414124, 4.6007449, 1.6…
+    ## $ hpi                           <dbl> 62.37983, NA, 58.14679, 56.11938, 59.532…
+    ## $ biocapacity_for_year_g_ha     <dbl> 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, …
+    ## $ gdp_per_capita                <chr> "19211.566759340509", "3061.787239836667…
 
 ## Presentation
 

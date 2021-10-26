@@ -30,10 +30,18 @@ Your results with proper output and graphics go in your presentation, this space
 library(tidyverse)
 library(janitor)
 library(readxl)
-data <- read_excel("hpi_2018_data.xlsx")
-hpi_data <- data %>% clean_names()
+hpi_2016 <- read_excel("hpi_2016_data.xlsx") %>% 
+  clean_names()
+hpi_2017 <- read_excel("hpi_2017_data.xlsx") %>% 
+  clean_names()
+hpi_2018 <- read_excel("hpi_2018_data.xlsx") %>% 
+  clean_names()
+hpi_2019 <- read_excel("hpi_2019_data.xlsx") %>% 
+  clean_names()
+hpi_2020 <- read_excel("hpi_2020_data.xlsx") %>% 
+  clean_names()
 
-glimpse(hpi_data)
+glimpse(hpi_2016)
 ```
 
 ## Presentation
