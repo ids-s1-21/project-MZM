@@ -1,6 +1,6 @@
 Project proposal
 ================
-Team name
+MZM
 
 ``` r
 library(tidyverse)
@@ -45,3 +45,13 @@ We will examine the changes within these three categories through years
 2016 to 2020 and compare specifically years 2016-2019 and 2020 to
 understand the effects of the pandemic on the countries’ happy planet
 indexes.
+
+Method: We are planning on taking the average of values of data tables
+from years 2016 to 2019 and creating another table. Comparing the new
+data frame, containing the averages of all values for the necessary
+variables, with values of 2020 will give us a more reliable
+difference/change due to the pandemic. Our analysis will contain three
+graphs (one for each category) with all the necessary variables.
+
+Conclusion: We expect decrease in mental health and economic factors due
+to the pandemic.
