@@ -30,6 +30,10 @@ different living standards of different groups, different incomes,
 different ethnicity and others. The data set was compiled using many
 open polls and data sets from the UN, York University and others.
 
+## 2. Data
+
+## 3. Data analysis plan
+
 We have analysed our data through three categories: geographic, economic
 and mental health. The first category contains variables population,
 ecological footprint and location (continent). Our second category
@@ -38,10 +42,6 @@ years,inequality of outcomes, inequality-adjusted life expectancy, and
 inequality-adjusted well-being.
 
 We will examine the changes within these three categories through years
-2015 to 2020 and compare specifically years 2015-2019 and 2020 to
+2016 to 2020 and compare specifically years 2016-2019 and 2020 to
 understand the effects of the pandemic on the countries’ happy planet
 indexes.
-
-## 2. Data
-
-## 3. Data analysis plan
