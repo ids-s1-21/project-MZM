@@ -23,8 +23,10 @@ Your results with proper output and graphics go in your presentation, this space
 library(tidyverse)
 library(janitor)
 library(readxl)
-data <- read_excel("happy_planet_index.xlsx")
+data <- read_excel("hpi_2018_data.xlsx")
 hpi_data <- data %>% clean_names()
+
+glimpse(hpi_data)
 ```
 
 ## Presentation
