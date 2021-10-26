@@ -5,6 +5,9 @@ output: github_document
 ---
 
 ## Summary
+We have analysed our data through three categories: geographic, economic and mental health. The first category contains variables population, ecological footprint and location (continent). Our second category compares values using variables average well-being,happy life years,inequality of outcomes, inequality-adjusted life expectancy, and inequality-adjusted well-being. 
+We will examine the changes within these three categories through years 2015 to 2020 and compare specifically years 2015-2019 and 2020 to understand the effects of the pandemic on the countries' happy planet indexes. 
+
 
 Write-up of your project and findings go here. 
 Think of this as the text of your presentation. 
