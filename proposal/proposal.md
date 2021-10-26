@@ -13,6 +13,35 @@ the course website. Remove this text when completing your proposal*.
 
 ## 1. Introduction
 
+In our project we aim to show how different countries compare against
+one another in multiple variables, one of which being the ‘Happy Planet
+Index’. This will help us understand which regions or countries are able
+to provide a good living standard while also having a healthy
+environmental footprint. Our data is from a data set named the ‘Happy
+Planet Index’ which has taken most countries and used their social
+happiness, environmental impact and also inequalities and differences of
+the countries people. Some important variables to know are the ‘Happy
+Planet Index’ which is a combination of a countries inequalities of
+living, their environmental impact and their peoples happiness. ‘Happy
+Life Years’ is the amount of years a person can expect to be enjoyable
+and less stressful in the given country. ‘Inequality adjusted life
+expectancy’ is life expectancy but is when you take in to account the
+different living standards of different groups, different incomes,
+different ethnicity and others. The data set was compiled using many
+open polls and data sets from the UN, York University and others.
+
+We have analysed our data through three categories: geographic, economic
+and mental health. The first category contains variables population,
+ecological footprint and location (continent). Our second category
+compares values using variables average well-being,happy life
+years,inequality of outcomes, inequality-adjusted life expectancy, and
+inequality-adjusted well-being.
+
+We will examine the changes within these three categories through years
+2015 to 2020 and compare specifically years 2015-2019 and 2020 to
+understand the effects of the pandemic on the countries’ happy planet
+indexes.
+
 ## 2. Data
 
 ## 3. Data analysis plan
