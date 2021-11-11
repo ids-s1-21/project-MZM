@@ -1,6 +1,6 @@
 ---
 title: "Project proposal"
-author: "Team name"
+author: "MZM"
 output: github_document
 ---
 
@@ -17,7 +17,22 @@ In our project we aim to show how different countries compare against one anothe
 
 ## 2. Data
 
+```{r load-data, echo = FALSE}
+library(tidyverse)
+library(janitor)
+library(readxl)
+hpi_2016 <- read_excel("hpi_2016_data.xlsx") %>% 
+  clean_names()
+hpi_2017 <- read_excel("hpi_2017_data.xlsx") %>% 
+  clean_names()
+hpi_2018 <- read_excel("hpi_2018_data.xlsx") %>% 
+  clean_names()
+hpi_2019 <- read_excel("hpi_2019_data.xlsx") %>% 
+  clean_names()
+hpi_2020 <- read_excel("hpi_2020_data.xlsx") %>% 
+  clean_names()
 
+```
 
 ## 3. Data analysis plan
 
@@ -25,3 +40,6 @@ We have analysed our data through three categories: geographic, economic and men
 
 We will examine the changes within these three categories through years 2016 to 2020 and compare specifically years 2016-2019 and 2020 to understand the effects of the pandemic on the countries' happy planet indexes.
 
+Method: We are planning on taking the average of values of data tables from years 2016 to 2019 and creating another table. Comparing the new data frame, containing the averages of all values for the necessary variables, with values of 2020 will give us a more reliable difference/change due to the pandemic. Our analysis will contain three graphs (one for each category) with all the necessary variables.
+
+Conclusion: We expect decrease in mental health and economic factors due to the pandemic.
