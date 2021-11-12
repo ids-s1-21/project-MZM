@@ -7,6 +7,7 @@ library(tidyverse)
 library(broom)
 library(readxl)
 library(janitor)
+library(scales)
 ```
 
 ## 1. Introduction
@@ -77,12 +78,14 @@ hpi_data %>%
   labs(
     title = "GDP and life expectancy around the world",
     subtitle = "Over time",
-    x = "GDP per capaita",
+    x = "GDP per capaita (in thousands)",
     y = "Life expectancy",
     region = "Region"
   ) +
   theme(legend.position = "bottom") +
-  scale_x_continuous()
+  scale_x_continuous(labels = label_dollar(scale = 0.001,
+                                           prefix = "$",
+                                           suffix = "K"))
 ```
 
     ## Warning: Removed 167 rows containing missing values (geom_point).
@@ -92,18 +95,20 @@ hpi_data %>%
 ``` r
 hpi_data %>%
   ggplot(aes(x = eco_footprint, fill = region)) +
-  geom_density() +
+  geom_histogram() +
   facet_wrap(~region) +
   labs(
     title = "Ecological footprint of countries",
     subtitle = "Faceted by region",
-    x = "Ecological footprint",
+    x = "Ecological footprint (in global hectares)",
     y = "Number of countries"
   ) +
   theme(legend.position = "none")
 ```
 
-    ## Warning: Removed 48 rows containing non-finite values (stat_density).
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 48 rows containing non-finite values (stat_bin).
 
 ![](proposal_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 

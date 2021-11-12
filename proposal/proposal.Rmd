@@ -9,6 +9,7 @@ library(tidyverse)
 library(broom)
 library(readxl)
 library(janitor)
+library(scales)
 ```
 
 
@@ -19,9 +20,6 @@ In our project we aim to show how different countries compare against one anothe
 ## 2. Data
 
 ```{r load-data, echo = FALSE}
-library(tidyverse)
-library(janitor)
-library(readxl)
 hpi_2016 <- read_excel("/cloud/project/hpi_2016_data.xlsx") %>% 
   clean_names()
 hpi_2017 <- read_excel("/cloud/project/hpi_2017_data.xlsx") %>% 
@@ -101,23 +99,25 @@ hpi_data %>%
   labs(
     title = "GDP and life expectancy around the world",
     subtitle = "Over time",
-    x = "GDP per capaita",
+    x = "GDP per capaita (in thousands)",
     y = "Life expectancy",
     region = "Region"
   ) +
   theme(legend.position = "bottom") +
-  scale_x_continuous()
+  scale_x_continuous(labels = label_dollar(scale = 0.001,
+                                           prefix = "$",
+                                           suffix = "K"))
 ```
 
 ```{r}
 hpi_data %>%
   ggplot(aes(x = eco_footprint, fill = region)) +
-  geom_density() +
+  geom_histogram() +
   facet_wrap(~region) +
   labs(
     title = "Ecological footprint of countries",
     subtitle = "Faceted by region",
-    x = "Ecological footprint",
+    x = "Ecological footprint (in global hectares)",
     y = "Number of countries"
   ) +
   theme(legend.position = "none")
