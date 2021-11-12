@@ -53,6 +53,8 @@ glimpse(hpi_data)
     ## $ gdp           <dbl> 19211.567, 3061.787, 14242.807, 66344.075, 11551.617, 29…
     ## $ year          <dbl> 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 20…
 
+## 3. Data analysis plan
+
 ``` r
 hpi_data %>%
   ggplot(aes(x = year, y = wellbeing, group = year)) +
@@ -68,7 +70,11 @@ hpi_data %>%
 
     ## Warning: Removed 75 rows containing non-finite values (stat_ydensity).
 
-![](proposal_files/figure-gfm/wellbeing-time%20plot-1.png)<!-- -->
+![](proposal_files/figure-gfm/wellbeing-time%20plot-1.png)<!-- --> It is
+clear from the graph that people in north america and oceania are the
+happiest about their wellbeing standards and that south asia seems very
+varied but also the least content. There doesn’t seem to be a clear
+impact from COVID in the wellbeing of countries.
 
 ``` r
 hpi_data %>%
@@ -90,7 +96,12 @@ hpi_data %>%
 
     ## Warning: Removed 167 rows containing missing values (geom_point).
 
-![](proposal_files/figure-gfm/gdp-life_exp%20plot-1.png)<!-- -->
+![](proposal_files/figure-gfm/gdp-life_exp%20plot-1.png)<!-- --> As we
+can see there is a clear relationship between life expectancy and GDP,
+countries with higher life expectancy also tend to have higher GDP’s.
+Most countries with low GDP’s and low life expectancy are in africa
+meanwhile western europe holds many of the top spots. There isnt much
+change year to year.
 
 ``` r
 hpi_data %>%
@@ -110,16 +121,19 @@ hpi_data %>%
 
     ## Warning: Removed 48 rows containing non-finite values (stat_bin).
 
-![](proposal_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
-
-## 3. Data analysis plan
+![](proposal_files/figure-gfm/unnamed-chunk-1-1.png)<!-- --> The graphs
+show the ecological footprint of each country 5 times for each year. We
+can see that Africa has a very low ecological footprint in general
+likely due to low rates of industrialisation. The middle east has the
+highest ecological footprint countries and the lowest simultaneously,
+this could be due to some countries being heavily industrialised and
+others having vast deserts with no ecological footprint.
 
 We have analysed our data through three categories: geographic, economic
-and mental health. The first category contains variables population,
-ecological footprint and location (continent). Our second category
-compares values using variables average well-being,happy life
-years,inequality of outcomes, inequality-adjusted life expectancy, and
-inequality-adjusted well-being.
+and mental health. The first category contains variables on general well
+being of the population. our second category obtainslife expactancyand
+GDP per capita. Lastly, our third category has information on ecological
+footprint based on their location (continent).
 
 We will examine the changes within these three categories through years
 2016 to 2020 and compare specifically years 2016-2019 and 2020 to
