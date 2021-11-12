@@ -66,7 +66,8 @@ hpi_data <- hpi_data %>%
          "wellbeing"     = ladder_of_life_wellbeing_0_10,
          "eco_footprint" = ecological_footprint_g_ha,
          "biocapacity"   = biocapacity_for_year_g_ha,
-         "gdp"           = gdp_per_capita) %>%
+         "gdp"           = gdp_per_capita,
+         "region"        = continent) %>%
   transform(gdp = as.numeric(gdp))
   
 ```
