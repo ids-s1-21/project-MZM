@@ -5,7 +5,13 @@ MZM
 ``` r
 library(tidyverse)
 library(broom)
+library(readxl)
+library(janitor)
 ```
+
+*For instructions on what each section should include, please see the
+[project page](https://idsed.digital/assessments/project/#proposal) on
+the course website. Remove this text when completing your proposal*.
 
 ## 1. Introduction
 
@@ -27,13 +33,6 @@ different ethnicity and others. The data set was compiled using many
 open polls and data sets from the UN, York University and others.
 
 ## 2. Data
-
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
 
     ## Warning in eval(substitute(list(...)), `_data`, parent.frame()): NAs introduced
     ## by coercion
