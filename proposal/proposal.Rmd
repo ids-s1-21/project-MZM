@@ -21,17 +21,50 @@ In our project we aim to show how different countries compare against one anothe
 library(tidyverse)
 library(janitor)
 library(readxl)
-hpi_2016 <- read_excel("hpi_2016_data.xlsx") %>% 
+hpi_2016 <- read_excel("/cloud/project/hpi_2016_data.xlsx") %>% 
   clean_names()
-hpi_2017 <- read_excel("hpi_2017_data.xlsx") %>% 
+hpi_2017 <- read_excel("/cloud/project/hpi_2017_data.xlsx") %>% 
   clean_names()
-hpi_2018 <- read_excel("hpi_2018_data.xlsx") %>% 
+hpi_2018 <- read_excel("/cloud/project/hpi_2018_data.xlsx") %>% 
   clean_names()
-hpi_2019 <- read_excel("hpi_2019_data.xlsx") %>% 
+hpi_2019 <- read_excel("/cloud/project/hpi_2019_data.xlsx") %>% 
   clean_names()
-hpi_2020 <- read_excel("hpi_2020_data.xlsx") %>% 
+hpi_2020 <- read_excel("/cloud/project/hpi_2020_data.xlsx") %>% 
   clean_names()
 
+```
+
+```{r cleaning-data, echo = FALSE}
+hpi_2016 <- hpi_2016 %>%
+  mutate(year = 2016)
+hpi_2017 <- hpi_2017 %>%
+  mutate(year = 2017)
+hpi_2018 <- hpi_2018 %>%
+  mutate(year = 2018)
+hpi_2019 <- hpi_2019 %>%
+  mutate(year = 2019)
+hpi_2020 <- hpi_2020 %>%
+  mutate(year = 2020)
+
+#The idea to use bind_rows came from the following post on StackOverflow: https://stackoverflow.com/questions/48444790/tidydata-combining-two-dataset-from-different-years-r-to-make-a-tidy-data-se
+hpi_data <- bind_rows(hpi_2016, hpi_2017)
+hpi_data <- bind_rows(hpi_data, hpi_2018)
+hpi_data <- bind_rows(hpi_data, hpi_2019)
+hpi_data <- bind_rows(hpi_data, hpi_2020)
+
+hpi_data <- hpi_data %>%
+  rename("pop_1000s"     = population_thousands,
+         "life_exp"      = life_expectancy_years,
+         "wellbeing"     = ladder_of_life_wellbeing_0_10,
+         "eco_footprint" = ecological_footprint_g_ha,
+         "biocapacity"   = biocapacity_for_year_g_ha,
+         "gdp"           = gdp_per_capita) %>%
+  transform(gdp = as.numeric(gdp))
+  
+```
+
+```{r glimpse data}
+glimpse(hpi_data)
 ```
 
 ## 3. Data analysis plan
