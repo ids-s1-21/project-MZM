@@ -62,11 +62,65 @@ hpi_data <- hpi_data %>%
          "gdp"           = gdp_per_capita,
          "region"        = continent) %>%
   transform(gdp = as.numeric(gdp))
-  
+
+hpi_data <- hpi_data %>%
+  mutate(region = case_when(
+    region == 1 ~ "Latin America",
+    region == 2 ~ "North America & Oceania",
+    region == 3 ~ "Western Europe",
+    region == 4 ~ "Middle East",
+    region == 5 ~ "Africa",
+    region == 6 ~ "South Asia",
+    region == 7 ~ "Eastern Europe & Central Asia",
+    region == 8 ~ "East Asia"
+  ))
 ```
 
 ```{r glimpse data}
 glimpse(hpi_data)
+```
+
+```{r wellbeing-time plot}
+hpi_data %>%
+  ggplot(aes(x = year, y = wellbeing, group = year)) +
+  geom_violin(trim = FALSE) +
+  facet_wrap(~region) +
+  labs(
+    title = "Wellbeing around the world",
+    subtitle = "Over time",
+    x = "Years",
+    y = "Wellbeing measure"
+  )
+```
+
+```{r gdp-life_exp plot}
+hpi_data %>%
+  ggplot(aes(x = gdp, y = life_exp, colour = region)) +
+  geom_point() +
+  facet_wrap(~year) +
+  labs(
+    title = "GDP and life expectancy around the world",
+    subtitle = "Over time",
+    x = "GDP per capaita",
+    y = "Life expectancy",
+    region = "Region"
+  ) +
+  theme(legend.position = "bottom") +
+  scale_x_continuous()
+```
+
+```{r}
+hpi_data %>%
+  ggplot(aes(x = eco_footprint, fill = region)) +
+  geom_density() +
+  facet_wrap(~region) +
+  labs(
+    title = "Ecological footprint of countries",
+    subtitle = "Faceted by region",
+    x = "Ecological footprint",
+    y = "Number of countries"
+  ) +
+  theme(legend.position = "none")
 ```
 
 ## 3. Data analysis plan

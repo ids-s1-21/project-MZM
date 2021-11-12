@@ -9,10 +9,6 @@ library(readxl)
 library(janitor)
 ```
 
-*For instructions on what each section should include, please see the
-[project page](https://idsed.digital/assessments/project/#proposal) on
-the course website. Remove this text when completing your proposal*.
-
 ## 1. Introduction
 
 In our project we aim to show how different countries compare against
@@ -24,13 +20,13 @@ Planet Index’ which has taken most countries and used their social
 happiness, environmental impact and also inequalities and differences of
 the countries people. Some important variables to know are the ‘Happy
 Planet Index’ which is a combination of a countries inequalities of
-living, their environmental impact and their peoples happiness. ‘Happy
-Life Years’ is the amount of years a person can expect to be enjoyable
-and less stressful in the given country. ‘Inequality adjusted life
-expectancy’ is life expectancy but is when you take in to account the
-different living standards of different groups, different incomes,
-different ethnicity and others. The data set was compiled using many
-open polls and data sets from the UN, York University and others.
+living, their environmental impact and their peoples happiness. ‘Eco
+Footprint’ is the average demand for the natural resources of the
+environment, so how much land and resources would be needed to sustain
+the country. ‘Biocapacity’ is the average wellbeing reported by the
+citizens of a country, measured through a survey in which people ranked
+their wellbeing from 1 to 10. The data set was compiled using many open
+polls and data sets from the UN, York University and others.
 
 ## 2. Data
 
@@ -46,7 +42,7 @@ glimpse(hpi_data)
     ## $ hpi_rank      <dbl> 1, NA, 3, 8, 2, 6, 10, 4, 9, NA, 12, 21, 13, 23, 20, 7, …
     ## $ country       <chr> "Costa Rica", "Vanuatu", "Colombia", "Switzerland", "Ecu…
     ## $ iso           <chr> "CRI", "VUT", "COL", "CHE", "ECU", "PAN", "JAM", "GTM", …
-    ## $ continent     <dbl> 1, 8, 1, 3, 1, 1, 1, 1, 1, 1, 2, 8, 1, 3, 1, 1, 7, 3, 1,…
+    ## $ region        <chr> "Latin America", "East Asia", "Latin America", "Western …
     ## $ pop_1000s     <dbl> 4899.336, 278.326, 48175.048, 8379.915, 16491.116, 4037.…
     ## $ life_exp      <dbl> 79.7, 70.0, 76.7, 83.3, 76.4, 78.0, 74.2, 73.5, 74.7, 77…
     ## $ wellbeing     <dbl> 7.135618, 6.712810, 6.233715, 7.458520, 6.115438, 6.1176…
@@ -55,6 +51,61 @@ glimpse(hpi_data)
     ## $ biocapacity   <dbl> 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1…
     ## $ gdp           <dbl> 19211.567, 3061.787, 14242.807, 66344.075, 11551.617, 29…
     ## $ year          <dbl> 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 20…
+
+``` r
+hpi_data %>%
+  ggplot(aes(x = year, y = wellbeing, group = year)) +
+  geom_violin(trim = FALSE) +
+  facet_wrap(~region) +
+  labs(
+    title = "Wellbeing around the world",
+    subtitle = "Over time",
+    x = "Years",
+    y = "Wellbeing measure"
+  )
+```
+
+    ## Warning: Removed 75 rows containing non-finite values (stat_ydensity).
+
+![](proposal_files/figure-gfm/wellbeing-time%20plot-1.png)<!-- -->
+
+``` r
+hpi_data %>%
+  ggplot(aes(x = gdp, y = life_exp, colour = region)) +
+  geom_point() +
+  facet_wrap(~year) +
+  labs(
+    title = "GDP and life expectancy around the world",
+    subtitle = "Over time",
+    x = "GDP per capaita",
+    y = "Life expectancy",
+    region = "Region"
+  ) +
+  theme(legend.position = "bottom") +
+  scale_x_continuous()
+```
+
+    ## Warning: Removed 167 rows containing missing values (geom_point).
+
+![](proposal_files/figure-gfm/gdp-life_exp%20plot-1.png)<!-- -->
+
+``` r
+hpi_data %>%
+  ggplot(aes(x = eco_footprint, fill = region)) +
+  geom_density() +
+  facet_wrap(~region) +
+  labs(
+    title = "Ecological footprint of countries",
+    subtitle = "Faceted by region",
+    x = "Ecological footprint",
+    y = "Number of countries"
+  ) +
+  theme(legend.position = "none")
+```
+
+    ## Warning: Removed 48 rows containing non-finite values (stat_density).
+
+![](proposal_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
 ## 3. Data analysis plan
 
