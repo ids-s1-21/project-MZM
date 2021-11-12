@@ -7,10 +7,6 @@ library(tidyverse)
 library(broom)
 ```
 
-*For instructions on what each section should include, please see the
-[project page](https://idsed.digital/assessments/project/#proposal) on
-the course website. Remove this text when completing your proposal*.
-
 ## 1. Introduction
 
 In our project we aim to show how different countries compare against

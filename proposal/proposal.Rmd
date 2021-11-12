@@ -7,6 +7,8 @@ output: github_document
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
+library(readxl)
+library(janitor)
 ```
 
 *For instructions on what each section should include, please see the [project page](https://idsed.digital/assessments/project/#proposal) on the course website. Remove this text when completing your proposal*.
@@ -18,9 +20,6 @@ In our project we aim to show how different countries compare against one anothe
 ## 2. Data
 
 ```{r load-data, echo = FALSE}
-library(tidyverse)
-library(janitor)
-library(readxl)
 hpi_2016 <- read_excel("hpi_2016_data.xlsx") %>% 
   clean_names()
 hpi_2017 <- read_excel("hpi_2017_data.xlsx") %>% 
