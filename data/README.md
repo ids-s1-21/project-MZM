@@ -13,6 +13,6 @@ This data file is 12 x 760, it has 12 variables and 720 observations representin
 - `wellbeing`: Average wellbeing reported by the citizens of a country, measured through a survey in which people ranked their wellbeing from 1 to 10.
 - `eco_footprint`: The average demand for the natural resources of the environment (measured in global hectares).
 - `hpi`: The happy planet index for a country, calculated as follows: (happy_life_years * inequality_outcome / footprint).
-- `biocapacity`: The average capacity of the envirnoment to provide natural resources (measured in global hectares). 
+- `biocapacity`: The average capacity of the environment to provide natural resources (measured in global hectares). 
 - `gdp`: Gross Domestic Product per cpaita of a country.
 - `year`: The year associated with the data for each country.
