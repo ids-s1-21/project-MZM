@@ -23,6 +23,9 @@ library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
 library(janitor)
+library(scales)
+library(readxl)
+library(broom)
 ```
 
 ```{r setup, include=FALSE}
@@ -31,7 +34,16 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-# Load your data here
+hpi_2016 <- read_excel("/cloud/project/hpi_2016_data.xlsx") %>% 
+  clean_names()
+hpi_2017 <- read_excel("/cloud/project/hpi_2017_data.xlsx") %>% 
+  clean_names()
+hpi_2018 <- read_excel("/cloud/project/hpi_2018_data.xlsx") %>% 
+  clean_names()
+hpi_2019 <- read_excel("/cloud/project/hpi_2019_data.xlsx") %>% 
+  clean_names()
+hpi_2020 <- read_excel("/cloud/project/hpi_2020_data.xlsx") %>% 
+  clean_names()
 ```
 
 ```{r include=FALSE}
