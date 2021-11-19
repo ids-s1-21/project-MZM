@@ -48,7 +48,7 @@ hpi_2020 <- read_excel("/cloud/project/hpi_2020_data.xlsx") %>%
 
 ```{r include=FALSE}
 style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
+  title_slide_background_image = "img/blackworldmap.jpg",
 )
 ```
 
