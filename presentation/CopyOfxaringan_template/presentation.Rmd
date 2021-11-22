@@ -1,7 +1,7 @@
 ---
-title: "HPI Data Analysis"
+title: "Happiness Around the World in the Face of Covid"
 subtitle: "Presentation subtitle (if any)"
-author: "MZM <br> Milosz, Zeyne, Marco"
+author: "MZM <br> Milosz, Zeynep, Marco"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
 output:
