@@ -1,5 +1,5 @@
 ---
-title: HPI Data Analysis
+title: Happiness around the world in the face of covid
 author: by MZM
 output: github_document
 ---
@@ -30,15 +30,16 @@ Your results with proper output and graphics go in your presentation, this space
 library(tidyverse)
 library(janitor)
 library(readxl)
-hpi_2016 <- read_excel("hpi_2016_data.xlsx") %>% 
+
+hpi_2016 <- read_excel("/cloud/project/data/hpi_2016_data.xlsx") %>% 
   clean_names()
-hpi_2017 <- read_excel("hpi_2017_data.xlsx") %>% 
+hpi_2017 <- read_excel("/cloud/project/data/hpi_2017_data.xlsx") %>% 
   clean_names()
-hpi_2018 <- read_excel("hpi_2018_data.xlsx") %>% 
+hpi_2018 <- read_excel("/cloud/project/data/hpi_2018_data.xlsx") %>% 
   clean_names()
-hpi_2019 <- read_excel("hpi_2019_data.xlsx") %>% 
+hpi_2019 <- read_excel("/cloud/project/data/hpi_2019_data.xlsx") %>% 
   clean_names()
-hpi_2020 <- read_excel("hpi_2020_data.xlsx") %>% 
+hpi_2020 <- read_excel("/cloud/project/data/hpi_2020_data.xlsx") %>% 
   clean_names()
 ```
 
