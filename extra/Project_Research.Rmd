@@ -11,13 +11,48 @@ library(janitor)
 library(readxl)
 ```
 
-```{r}
+```{r functions, echo=FALSE}
 tidy_name_year <- function(data, year_no){
   data <- data %>%
     clean_names() %>%
     mutate(year = year_no)
   return(data)
 }
+
+tidy_append_data <- function(data1, data2, data3, 
+                             data4, data5){
+  data <- bind_rows(data1, data2)
+  data <- bind_rows(data, data3)
+  data <- bind_rows(data, data4)
+  data <- bind_rows(data, data5)
+  
+  data <- data %>%
+  rename("pop_1000s"     = population_thousands,
+         "life_exp"      = life_expectancy_years,
+         "wellbeing"     = ladder_of_life_wellbeing_0_10,
+         "eco_footprint" = ecological_footprint_g_ha,
+         "biocapacity"   = biocapacity_for_year_g_ha,
+         "gdp"           = gdp_per_capita,
+         "region"        = continent) %>%
+  transform(gdp = as.numeric(gdp))
+}
+```
+
+```{r load data, echo=FALSE}
+hpi_2016 <- read_excel("/cloud/project/data/hpi_2016_data.xlsx")
+hpi_2017 <- read_excel("/cloud/project/data/hpi_2017_data.xlsx")
+hpi_2018 <- read_excel("/cloud/project/data/hpi_2018_data.xlsx") 
+hpi_2019 <- read_excel("/cloud/project/data/hpi_2019_data.xlsx")
+hpi_2020 <- read_excel("/cloud/project/data/hpi_2020_data.xlsx")
+
+hpi_2016 <- tidy_name_year(hpi_2016, 2016)
+hpi_2017 <- tidy_name_year(hpi_2017, 2017)
+hpi_2018 <- tidy_name_year(hpi_2018, 2018)
+hpi_2019 <- tidy_name_year(hpi_2019, 2019)
+hpi_2020 <- tidy_name_year(hpi_2020, 2020)
+
+hpi_data <- tidy_append_data(hpi_2016, hpi_2017, hpi_2018, 
+                             hpi_2019, hpi_2020)
 ```
 
 ## R Markdown
