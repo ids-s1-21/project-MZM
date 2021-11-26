@@ -1,7 +1,7 @@
 Project_Research
 ================
 MZM
-24/11/2021
+2021-11-26
 
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 
@@ -21,80 +21,255 @@ MZM
     ## 
     ##     chisq.test, fisher.test
 
-``` r
-tidy_name_year <- function(data, year_no){
-  data <- data %>%
-    clean_names() %>%
-    mutate(year = year_no)
-  return(data)
-}
+    ## 
+    ## Attaching package: 'scales'
 
-tidy_append_data <- function(data1, data2, data3, 
-                             data4, data5){
-  data <- bind_rows(data1, data2)
-  data <- bind_rows(data, data3)
-  data <- bind_rows(data, data4)
-  data <- bind_rows(data, data5)
-  
-  data <- data %>%
-  rename("pop_1000s"     = population_thousands,
-         "life_exp"      = life_expectancy_years,
-         "wellbeing"     = ladder_of_life_wellbeing_0_10,
-         "eco_footprint" = ecological_footprint_g_ha,
-         "biocapacity"   = biocapacity_for_year_g_ha,
-         "gdp"           = gdp_per_capita,
-         "region"        = continent) %>%
-  transform(gdp = as.numeric(gdp))
-}
-```
+    ## The following object is masked from 'package:purrr':
+    ## 
+    ##     discard
 
-``` r
-hpi_2016 <- read_excel("/cloud/project/data/hpi_2016_data.xlsx")
-hpi_2017 <- read_excel("/cloud/project/data/hpi_2017_data.xlsx")
-hpi_2018 <- read_excel("/cloud/project/data/hpi_2018_data.xlsx") 
-hpi_2019 <- read_excel("/cloud/project/data/hpi_2019_data.xlsx")
-hpi_2020 <- read_excel("/cloud/project/data/hpi_2020_data.xlsx")
+    ## The following object is masked from 'package:readr':
+    ## 
+    ##     col_factor
 
-hpi_2016 <- tidy_name_year(hpi_2016, 2016)
-hpi_2017 <- tidy_name_year(hpi_2017, 2017)
-hpi_2018 <- tidy_name_year(hpi_2018, 2018)
-hpi_2019 <- tidy_name_year(hpi_2019, 2019)
-hpi_2020 <- tidy_name_year(hpi_2020, 2020)
+    ## Registered S3 method overwritten by 'tune':
+    ##   method                   from   
+    ##   required_pkgs.model_spec parsnip
 
-hpi_data <- tidy_append_data(hpi_2016, hpi_2017, hpi_2018, 
-                             hpi_2019, hpi_2020)
-```
+    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.3 ──
+
+    ## ✓ broom        0.7.9      ✓ rsample      0.1.0 
+    ## ✓ dials        0.0.9      ✓ tune         0.1.6 
+    ## ✓ infer        0.5.4      ✓ workflows    0.2.3 
+    ## ✓ modeldata    0.1.1      ✓ workflowsets 0.1.0 
+    ## ✓ parsnip      0.1.7      ✓ yardstick    0.0.8 
+    ## ✓ recipes      0.1.16
+
+    ## ── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
+    ## x broom::bootstrap() masks modelr::bootstrap()
+    ## x scales::discard()  masks purrr::discard()
+    ## x dplyr::filter()    masks stats::filter()
+    ## x recipes::fixed()   masks stringr::fixed()
+    ## x dplyr::lag()       masks stats::lag()
+    ## x yardstick::mae()   masks modelr::mae()
+    ## x yardstick::mape()  masks modelr::mape()
+    ## x yardstick::rmse()  masks modelr::rmse()
+    ## x yardstick::spec()  masks readr::spec()
+    ## x recipes::step()    masks stats::step()
+    ## • Use tidymodels_prefer() to resolve common conflicts.
 
     ## Warning in eval(substitute(list(...)), `_data`, parent.frame()): NAs introduced
     ## by coercion
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that
-includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
-
 ``` r
-summary(cars)
+hpi_data %>%
+  ggplot(aes(x = gdp, y = life_exp, colour = region)) +
+  geom_point() +
+  facet_wrap(~year) +
+  labs(
+    title = "GDP and life expectancy around the world",
+    subtitle = "Over time",
+    x = "GDP per capaita (in thousands)",
+    y = "Life expectancy",
+    region = "Region"
+  ) +
+  theme(legend.position = "bottom") +
+  scale_x_continuous(labels = label_dollar(scale = 0.001,
+                                           prefix = "$",
+                                           suffix = "K"))
 ```
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+    ## Warning: Removed 167 rows containing missing values (geom_point).
 
-## Including Plots
+![](Project_Research_files/figure-gfm/gdp-life_exp%20plot-1.png)<!-- -->
 
-You can also embed plots, for example:
+``` r
+hpi_data %>%
+  filter(year != 2020) %>%
+  ggplot(aes(x = gdp, y = hpi, colour = region)) +
+  geom_point(alpha = 0.3)
+```
 
-![](Project_Research_files/figure-gfm/pressure-1.png)<!-- -->
+    ## Warning: Removed 36 rows containing missing values (geom_point).
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+![](Project_Research_files/figure-gfm/gdp-hpi%20plot-1.png)<!-- -->
+
+``` r
+hpi_data %>%
+  filter(year != 2020) %>%
+  ggplot(aes(x = gdp, y = happy_life_years, color = region)) +   geom_point() +
+  facet_wrap(~year)
+```
+
+    ## Warning: Removed 32 rows containing missing values (geom_point).
+
+![](Project_Research_files/figure-gfm/happy%20life%20years%20and%20gdp%20plot-1.png)<!-- -->
+
+``` r
+summarised_gdp_hpi <- hpi_data %>%
+  filter(year != 2020) %>%
+  group_by(country, region) %>%
+  summarise(avg_gdp = median(gdp), 
+            avg_life_years = mean(happy_life_years, 
+                                  rm.na = TRUE))
+```
+
+    ## `summarise()` has grouped output by 'country'. You can override using the `.groups` argument.
+
+``` r
+summarised_gdp_hpi %>%
+  ggplot(aes(x = avg_gdp, y = avg_life_years, 
+             colour = region)) +
+  geom_point() +
+  geom_abline(aes(slope = 0.000517, intercept = 27.7)) +
+  facet_wrap(~region)
+```
+
+    ## Warning: Removed 13 rows containing missing values (geom_point).
+
+![](Project_Research_files/figure-gfm/happy%20life%20years%20and%20gdp%20plots-1.png)<!-- -->
+
+``` r
+gdp_hpi_SA <- summarised_gdp_hpi %>%
+  filter(region == "South Asia")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_SA) %>%
+  tidy()
+```
+
+    ## # A tibble: 2 × 5
+    ##   term         estimate std.error statistic p.value
+    ##   <chr>           <dbl>     <dbl>     <dbl>   <dbl>
+    ## 1 (Intercept) 27.7       5.35         5.19  0.00656
+    ## 2 avg_gdp      0.000517  0.000818     0.633 0.561
+
+``` r
+gdp_hpi_EECA <- summarised_gdp_hpi %>%
+  filter(region == "Eastern Europe & Central Asia")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_EECA) %>%
+  tidy()
+```
+
+    ## # A tibble: 2 × 5
+    ##   term         estimate std.error statistic  p.value
+    ##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    ## 1 (Intercept) 34.0      1.50          22.7  3.40e-18
+    ## 2 avg_gdp      0.000389 0.0000636      6.12 2.12e- 6
+
+``` r
+gdp_hpi_ME <- summarised_gdp_hpi %>%
+  filter(region == "Middle East")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_ME) %>%
+  tidy()
+```
+
+    ## # A tibble: 2 × 5
+    ##   term         estimate std.error statistic  p.value
+    ##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    ## 1 (Intercept) 32.4      1.92          16.9  1.03e-10
+    ## 2 avg_gdp      0.000352 0.0000622      5.66 5.90e- 5
+
+``` r
+gdp_hpi_LA <- summarised_gdp_hpi %>%
+  filter(region == "Latin America")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_LA) %>%
+  tidy()
+```
+
+    ## # A tibble: 2 × 5
+    ##   term         estimate std.error statistic  p.value
+    ##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    ## 1 (Intercept) 37.9       2.80         13.5  1.55e-10
+    ## 2 avg_gdp      0.000520  0.000174      2.98 8.38e- 3
+
+``` r
+gdp_hpi_NAO <- summarised_gdp_hpi %>%
+  filter(region == "North America & Oceania")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_NAO) %>%
+  tidy()
+```
+
+    ## # A tibble: 2 × 5
+    ##   term         estimate std.error statistic p.value
+    ##   <chr>           <dbl>     <dbl>     <dbl>   <dbl>
+    ## 1 (Intercept) 74.4       5.22         14.3  0.00489
+    ## 2 avg_gdp     -0.000316  0.000103     -3.07 0.0918
+
+``` r
+gdp_hpi_WE <- summarised_gdp_hpi %>%
+  filter(region == "Western Europe")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_WE) %>%
+  tidy()
+```
+
+    ## # A tibble: 2 × 5
+    ##   term         estimate std.error statistic  p.value
+    ##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    ## 1 (Intercept) 48.4      3.23          15.0  1.31e-11
+    ## 2 avg_gdp      0.000157 0.0000572      2.74 1.34e- 2
+
+``` r
+gdp_hpi_A <- summarised_gdp_hpi %>%
+  filter(region == "Africa")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_A) %>%
+  tidy()
+```
+
+    ## # A tibble: 2 × 5
+    ##   term         estimate std.error statistic  p.value
+    ##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    ## 1 (Intercept) 24.9       0.928        26.9  4.90e-23
+    ## 2 avg_gdp      0.000538  0.000137      3.93 4.47e- 4
+
+``` r
+gdp_hpi_EA <- summarised_gdp_hpi %>%
+  filter(region == "East Asia")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_EA) %>%
+  tidy()
+```
+
+    ## # A tibble: 2 × 5
+    ##   term         estimate std.error statistic  p.value
+    ##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+    ## 1 (Intercept) 37.9      1.84          20.6  1.01e-10
+    ## 2 avg_gdp      0.000176 0.0000515      3.42 5.10e- 3
+
+``` r
+df <- data_frame(x = c(1,2), y = c(2,4))
+```
+
+    ## Warning: `data_frame()` was deprecated in tibble 1.1.0.
+    ## Please use `tibble()` instead.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
+
+``` r
+ggplot(df, aes(x = x, y = y)) +
+  geom_point() +
+  geom_abline(aes(slope = -0.2,intercept = 3))
+```
+
+![](Project_Research_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->

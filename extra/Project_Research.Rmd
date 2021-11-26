@@ -1,7 +1,7 @@
 ---
 title: "Project_Research"
 author: "MZM"
-date: "24/11/2021"
+date: "`r Sys.Date()`"
 output: github_document
 ---
 
@@ -9,6 +9,10 @@ output: github_document
 library(tidyverse)
 library(janitor)
 library(readxl)
+library(scales)
+library(splines)
+library(modelr)
+library(tidymodels)
 ```
 
 ```{r functions, echo=FALSE}
@@ -35,6 +39,18 @@ tidy_append_data <- function(data1, data2, data3,
          "gdp"           = gdp_per_capita,
          "region"        = continent) %>%
   transform(gdp = as.numeric(gdp))
+  
+  data <- data %>%
+  mutate(region = case_when(
+    region == 1 ~ "Latin America",
+    region == 2 ~ "North America & Oceania",
+    region == 3 ~ "Western Europe",
+    region == 4 ~ "Middle East",
+    region == 5 ~ "Africa",
+    region == 6 ~ "South Asia",
+    region == 7 ~ "Eastern Europe & Central Asia",
+    region == 8 ~ "East Asia"),
+    happy_life_years = life_exp * wellbeing / 10)
 }
 ```
 
@@ -55,22 +71,138 @@ hpi_data <- tidy_append_data(hpi_2016, hpi_2017, hpi_2018,
                              hpi_2019, hpi_2020)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r gdp-life_exp plot}
+hpi_data %>%
+  ggplot(aes(x = gdp, y = life_exp, colour = region)) +
+  geom_point() +
+  facet_wrap(~year) +
+  labs(
+    title = "GDP and life expectancy around the world",
+    subtitle = "Over time",
+    x = "GDP per capaita (in thousands)",
+    y = "Life expectancy",
+    region = "Region"
+  ) +
+  theme(legend.position = "bottom") +
+  scale_x_continuous(labels = label_dollar(scale = 0.001,
+                                           prefix = "$",
+                                           suffix = "K"))
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r gdp-hpi plot}
+hpi_data %>%
+  filter(year != 2020) %>%
+  ggplot(aes(x = gdp, y = hpi, colour = region)) +
+  geom_point(alpha = 0.3)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r happy life years and gdp plot}
+hpi_data %>%
+  filter(year != 2020) %>%
+  ggplot(aes(x = gdp, y = happy_life_years, color = region)) +   geom_point() +
+  facet_wrap(~year)
+```
+
+```{r happy life years and gdp plots}
+summarised_gdp_hpi <- hpi_data %>%
+  filter(year != 2020) %>%
+  group_by(country, region) %>%
+  summarise(avg_gdp = median(gdp), 
+            avg_life_years = mean(happy_life_years, 
+                                  rm.na = TRUE))
+
+summarised_gdp_hpi %>%
+  ggplot(aes(x = avg_gdp, y = avg_life_years, 
+             colour = region)) +
+  geom_point() +
+  geom_abline(aes(slope = 0.000517, intercept = 27.7)) +
+  facet_wrap(~region)
+```
+
+```{r lm for South Asia}
+gdp_hpi_SA <- summarised_gdp_hpi %>%
+  filter(region == "South Asia")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_SA) %>%
+  tidy()
+```
+
+```{r lm for Eastern Europe & Central Asia}
+gdp_hpi_EECA <- summarised_gdp_hpi %>%
+  filter(region == "Eastern Europe & Central Asia")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_EECA) %>%
+  tidy()
+```
+
+```{r lm for Middle East}
+gdp_hpi_ME <- summarised_gdp_hpi %>%
+  filter(region == "Middle East")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_ME) %>%
+  tidy()
+```
+
+```{r lm for Latin America}
+gdp_hpi_LA <- summarised_gdp_hpi %>%
+  filter(region == "Latin America")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_LA) %>%
+  tidy()
+```
+
+```{r lm for North America & Oceania}
+gdp_hpi_NAO <- summarised_gdp_hpi %>%
+  filter(region == "North America & Oceania")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_NAO) %>%
+  tidy()
+```
+
+```{r lm for Western Europe}
+gdp_hpi_WE <- summarised_gdp_hpi %>%
+  filter(region == "Western Europe")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_WE) %>%
+  tidy()
+```
+
+```{r lm for Africa}
+gdp_hpi_A <- summarised_gdp_hpi %>%
+  filter(region == "Africa")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_A) %>%
+  tidy()
+```
+
+```{r lm for East Asia}
+gdp_hpi_EA <- summarised_gdp_hpi %>%
+  filter(region == "East Asia")
+
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(avg_life_years ~ avg_gdp, data = gdp_hpi_EA) %>%
+  tidy()
+```
+
+```{r}
+df <- data_frame(x = c(1,2), y = c(2,4))
+ggplot(df, aes(x = x, y = y)) +
+  geom_point() +
+  geom_abline(aes(slope = -0.2,intercept = 3))
+```
+
