@@ -206,3 +206,25 @@ ggplot(df, aes(x = x, y = y)) +
   geom_abline(aes(slope = -0.2,intercept = 3))
 ```
 
+```{r eco-analysis-middle-east}
+hpi_middle_east <- filter(hpi_data, region == "Middle East", eco_footprint > 3)
+
+ggplot(data = hpi_middle_east, aes(x = year, y = eco_footprint, colour = country))+
+  geom_line()
+```
+
+
+```{r eco-analysis-western-europe}
+hpi_western_europe <- filter(hpi_data, region == "Western Europe", eco_footprint > 5, eco_footprint < 9)
+
+ggplot(data = hpi_western_europe, aes(x = year, y = eco_footprint, colour = country))+
+  geom_line()
+```
+
+
+```{r eco-analysis-africa}
+hpi_africa <- filter(hpi_data, region == "Africa")
+
+ggplot(data = hpi_africa, aes(x = year, y = eco_footprint, colour = country))+
+  geom_line()
+```
