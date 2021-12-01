@@ -228,3 +228,23 @@ hpi_africa <- filter(hpi_data, region == "Africa")
 ggplot(data = hpi_africa, aes(x = year, y = eco_footprint, colour = country))+
   geom_line()
 ```
+
+```{r eco-analysis-middle-east}
+target = c("Middle East", "Africa", "Western Europe")
+
+gdp_3 <- filter(hpi_data, region == target, year == 2019)
+
+ggplot(data = gdp_3, aes(x = country, y = gdp, fill = region, group = region))+
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+From 2016 to 2019 most countries have an increasing or steady ecological footprint but from
+2019 to 2020 we see a decline from virtually every nation observed. 
+This is not only a trend followed by similar countries as the gdp of countries in
+these regions vary significantly with africa being a lot lower than the rest. There are 
+many possible reasons for this change but most obvious would be covid.
+The large scale closures and lockdowns would have led to less resources being required
+thus lowering countries ecological footprint. Other reasons could be governments being
+more proactive about climate change but this would not explain how wide spread this
+decrease is.
