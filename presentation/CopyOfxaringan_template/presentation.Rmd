@@ -109,7 +109,11 @@ class: center, middle
 
 --
 
-- The envirnoment's well-being
+- The environment's well-being
+
+--
+
+- But also how did covid affect our 'happiness'
 
 ---
 
@@ -131,16 +135,6 @@ HPI _'A measure of sustainable well-being'_ combines:
 include_graphics("https://images.squarespace-cdn.com/content/5735c421e321402778ee0ce9/1468967122683-U0FM442TNA25ZLSAL027/fb_Facebook.png?content-type=image%2Fpng")
 ```
 ]
-
----
-
-class: inverse, center, middle
-
-# Wellbeing
-
----
-
-# Text
 
 ---
 
@@ -195,9 +189,19 @@ summarised_gdp_hpi %>%
 
 ---
 
+# Text
+
+---
+
 class: inverse, center, middle
 
 # Ecology
+
+---
+
+class: inverse, center, middle
+
+# Well-being
 
 ---
 

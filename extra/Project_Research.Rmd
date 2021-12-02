@@ -203,11 +203,12 @@ linear_reg() %>%
   tidy()
 ```
 
-```{r}
-df <- data_frame(x = c(1,2), y = c(2,4))
-ggplot(df, aes(x = x, y = y)) +
+```{r hpi years plot}
+hpi_data %>%
+  group_by(country, )
+  ggplot(aes(x = country, y = hpi)) +
   geom_point() +
-  geom_abline(aes(slope = -0.2,intercept = 3))
+  facet_grid(~year)
 ```
 
 ```{r eco-analysis-middle-east}
