@@ -203,7 +203,98 @@ class: inverse, center, middle
 
 # Well-being
 
----
+```{r wellbeing-year plot}
+library(gganimate)
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+graph3 <- hpi_data %>%
+  ggplot(aes(x = year, y = wellbeing, group = year)) +
+  geom_violin(trim = FALSE) +
+  facet_wrap(~region) +
+  labs(title = "Wellbeing Around the World",
+    subtitle = "Over Time",
+    x = "Years",
+    y = "Wellbeing measure") + 
+  theme(legend.position = "none",
+        axis.title.y = element_text(),
+        text= element_text(family = "Poppins Bold"),
+        panel.grid.major.x= element_blank(),
+        axis.title.x= element_blank()) +
+  scale_fill_tableau()
+```
+
+```{r wellbeing-year animation}
+graph3.animation <- graph3 + 
+  transition_states(year, wrap= FALSE) +
+  shadow_mark(alpha = 0.5) +
+  enter_grow() +
+  exit_fade() +
+  ease_aes('back-out')
+
+animate(graph3.animation, end_pause = 60)
+```
+
+```{r wellbeing-life_exp plot}
+graph1 <- hpi_data %>% 
+  ggplot(aes(x = wellbeing, y=life_exp, colour = region, size = pop_1000s)) +     geom_point(alpha= 0.9, stroke = 0) +
+  scale_size(range = c(2, 12), guide = "none") +
+  scale_x_log10() +
+  labs(title = "Life Expectancy vs Wellbeing by Region",
+       x = "Wellbeing", 
+       y = "Life Expectancy",
+       color= "Region") +
+  theme(axis.title = element_text(family = "Rubik"),
+        legend.text = element_text(size = 10)) +
+  scale_color_brewer(palette = "Set2")
+```
+
+```{r wellbeing-life_exp animation}
+graph1.animation <- graph1 + 
+  transition_time(year) +
+  labs(subtitle = "Year: {frame_time}") +
+  shadow_wake(wake_length = 0.3)
+
+animate(graph1.animation, height= 500, width = 800, fps = 30, duration = 10,
+        end_pause = 60, res = 100)
+
+anim_save("wellbeing graph 1.gif")
+```
+
+```{r wellbeing-eco plot}
+hpi_data_clean <- na.omit(hpi_data)
+graph2 <- hpi_data_clean %>%
+  ggplot(aes(x = eco_footprint, y = wellbeing, group = year, color= region)) +
+  geom_line(size= 2, alpha = 0.75) +
+  theme_solarized_2(light= FALSE) +
+  facet_wrap(~region) +
+  labs(title = "Wellbeing vs Ecological Footprint by Region",
+    subtitle = "Over time",
+    x = "Ecological Footprint",
+    y = "Wellbeing measure") +
+  theme(text = element_text(family = "DM Sans Medium", color = "#EEEEEE"),
+        title = element_text(color = "#EEEEEE"),
+        panel.background = element_rect(fill = NA),
+        plot.background = element_rect(fill = "#111111"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.position = "none",
+        plot.title = element_text(hjust = 0.5)) +
+  scale_color_brewer(palette = "Pastel1") +
+  geom_point() +
+  scale_x_continuous(breaks = 0:2100)
+```
+
+```{r wellbeing-eco animation}
+graph2.animation <- graph2 +
+  transition_reveal(eco_footprint) +
+  view_follow(fixed_y = TRUE)
+
+animate(graph2.animation, height= 500, width = 800, fps = 30, duration = 10,
+        end_pause = 60, res = 100)
+
+anim_save("wellbeing graph 2.gif")
+```
 
 # Text
 

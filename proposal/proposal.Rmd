@@ -89,6 +89,56 @@ hpi_data %>%
     x = "Years",
     y = "Wellbeing measure"
   )
+
+hpi_data %>%
+  ggplot(aes(x = eco_footprint, y = wellbeing, group = year, color= region)) +
+  geom_line(trim = FALSE) +
+  facet_wrap() +
+  labs(
+    title = "Wellbeing around the world",
+    subtitle = "Over time",
+    x = "Ecological Footprint",
+    y = "Wellbeing measure"
+  )
+hpi_data %>%
+  ggplot(aes(x = life_exp, y = wellbeing, group = year)) +
+  geom_point(trim = FALSE) +
+  facet_wrap(~region) +
+  labs(
+    title = "Wellbeing around the world",
+    subtitle = "Over time",
+    x = "Life Expectancy",
+    y = "Wellbeing measure"
+  )
+
+library(viridis)
+library(gganimate)
+
+hpi_data_clean <- na.omit(hpi_data)
+
+p <- ggplot(
+  hpi_data_clean, 
+  aes(x = wellbeing, y=life_exp, size = pop_1000s, colour = country)
+  ) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_color_viridis(name= "country", discrete = TRUE) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  guides(colour = guide_legend(order = 2), shape = guide_legend(order = 1)) +
+  theme_void() + 
+    theme(legend.position = "bottom", legend.box = "vertical", legend.title.align = 0) +
+    theme(plot.title = element_text(hjust = 0.5, vjust = 0.05)) +
+    theme(plot.caption = element_text(hjust = 0, color="gray40", size=10)) +
+  labs(x = "Wellbeing", y = "Life Expectancy")
+
+animation<- p + transition_states(year,
+                              transition_length = 2,
+                              state_length = 1) 
+gifski_renderer(file = NULL, loop = TRUE, width = NULL, height = NULL)(animation)
+animation
+library(reprex)
+
+file_renderer(dir = ".", prefix = "gganim_plot", overwrite = FALSE)(animation)
 ```
 It is clear from the graph that people in north america and oceania are the happiest about their wellbeing standards and that south asia seems very varied but also the least content. There doesn't seem to be a clear impact from COVID in the wellbeing of countries.
 
@@ -122,6 +172,7 @@ hpi_data %>%
     y = "Number of countries"
   ) +
   theme(legend.position = "none")
+
 ```
 The graphs show the ecological footprint of each country 5 times for each year. We can see that Africa has a very low ecological footprint in general likely due to low rates of industrialisation. The middle east has the highest ecological footprint countries and the lowest simultaneously, this could be due to some countries being heavily industrialised and others having vast deserts with no ecological footprint.
 
