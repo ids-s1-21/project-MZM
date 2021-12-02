@@ -33,17 +33,60 @@ library(broom)
 knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
 ```
 
-```{r load-data, include=FALSE}
-hpi_2016 <- read_excel("/cloud/project/data/hpi_2016_data.xlsx") %>% 
-  clean_names()
-hpi_2017 <- read_excel("/cloud/project/data/hpi_2017_data.xlsx") %>% 
-  clean_names()
-hpi_2018 <- read_excel("/cloud/project/data/hpi_2018_data.xlsx") %>% 
-  clean_names()
-hpi_2019 <- read_excel("/cloud/project/data/hpi_2019_data.xlsx") %>% 
-  clean_names()
-hpi_2020 <- read_excel("/cloud/project/data/hpi_2020_data.xlsx") %>% 
-  clean_names()
+```{r functions, include=FALSE}
+tidy_name_year <- function(data, year_no){
+  data <- data %>%
+    clean_names() %>%
+    mutate(year = year_no)
+  return(data)
+}
+
+tidy_append_data <- function(data1, data2, data3, 
+                             data4, data5){
+  data <- bind_rows(data1, data2)
+  data <- bind_rows(data, data3)
+  data <- bind_rows(data, data4)
+  data <- bind_rows(data, data5)
+  
+  data <- data %>%
+  rename("pop_1000s"     = population_thousands,
+         "life_exp"      = life_expectancy_years,
+         "wellbeing"     = ladder_of_life_wellbeing_0_10,
+         "eco_footprint" = ecological_footprint_g_ha,
+         "biocapacity"   = biocapacity_for_year_g_ha,
+         "gdp"           = gdp_per_capita,
+         "region"        = continent) %>%
+  transform(gdp = as.numeric(gdp))
+  
+  data <- data %>%
+  mutate(region = case_when(
+    region == 1 ~ "Latin America",
+    region == 2 ~ "North America & Oceania",
+    region == 3 ~ "Western Europe",
+    region == 4 ~ "Middle East",
+    region == 5 ~ "Africa",
+    region == 6 ~ "South Asia",
+    region == 7 ~ "Eastern Europe & Central Asia",
+    region == 8 ~ "East Asia"),
+    happy_life_years = life_exp * wellbeing / 10)
+}
+```
+
+```{r load data, include=FALSE}
+hpi_2016 <- read_excel("/cloud/project/data/hpi_2016_data.xlsx")
+hpi_2017 <- read_excel("/cloud/project/data/hpi_2017_data.xlsx")
+hpi_2018 <- read_excel("/cloud/project/data/hpi_2018_data.xlsx") 
+hpi_2019 <- read_excel("/cloud/project/data/hpi_2019_data.xlsx")
+hpi_2020 <- read_excel("/cloud/project/data/hpi_2020_data.xlsx")
+
+hpi_2016 <- tidy_name_year(hpi_2016, 2016)
+hpi_2017 <- tidy_name_year(hpi_2017, 2017)
+hpi_2018 <- tidy_name_year(hpi_2018, 2018)
+hpi_2019 <- tidy_name_year(hpi_2019, 2019)
+hpi_2020 <- tidy_name_year(hpi_2020, 2020)
+
+hpi_data <- tidy_append_data(hpi_2016, hpi_2017, hpi_2018, 
+                             hpi_2019, hpi_2020)
 ```
 
 ```{r include=FALSE}
@@ -54,7 +97,82 @@ style_xaringan(
 
 class: center, middle
 
-## A statement of the overall goal / research question
+## What makes a country 'happy'?
+
+---
+
+# But what do we mean by 'happy'?
+
+--
+
+- 'happy' as in well-being
+
+--
+
+- 'happy' as in respectful of the environment
+
+---
+
+# Our Data (HPI)
+
+Our data comes from the Happy Planet Index (HPI) data set
+
+.pull-left[
+HPI _'A measure of sustainable well-being'_ combines:
+
+- Reported Well-being
+
+- Life Expectancy
+
+- Ecological footprint
+]
+.pull-right[
+```{r hpi, echo = FALSE, out.width = "200%", fig.align = "center", fig.cap = "Image credit: happyplanetindex.org."}
+include_graphics("https://images.squarespace-cdn.com/content/5735c421e321402778ee0ce9/1468967122683-U0FM442TNA25ZLSAL027/fb_Facebook.png?content-type=image%2Fpng")
+```
+]
+
+---
+
+class: inverse, center, middle
+
+# Wellbeing
+
+---
+
+# Text
+
+---
+
+class: inverse, center, middle
+
+# Economics
+
+---
+
+class: center, middle
+
+```{r gdp-hpi plot, echo=FALSE, warning=FALSE}
+hpi_data %>%
+  filter(year != 2020) %>%
+  ggplot(aes(x = gdp, y = hpi, colour = region)) +
+  geom_point(alpha = 0.3) +
+  theme_minimal()
+```
+
+---
+
+# Text
+
+---
+
+class: inverse, center, middle
+
+# Ecology
+
+---
+
+# Text
 
 ---
 
