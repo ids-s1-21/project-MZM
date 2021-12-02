@@ -199,6 +199,44 @@ class: inverse, center, middle
 
 ---
 
+# Ecology
+```{r eco-gdp, echo=FALSE, warning=FALSE}
+  ggplot(data = hpi_data, aes(x = gdp, y = eco_footprint, group = country, colour = gdp))+
+  geom_jitter()
+```
+---
+
+# Ecology
+```{r eco-analysis, figures-side, fig.show="hold", out.width="33%", echo=FALSE, warning=FALSE}
+hpi_western_europe <- filter(hpi_data, region == "Western Europe", eco_footprint > 5, eco_footprint < 9)
+
+ggplot(data = hpi_western_europe, aes(x = year, y = eco_footprint, colour = country))+
+  geom_line()
+
+
+hpi_middle_east <- filter(hpi_data, region == "Middle East")
+
+ggplot(data = hpi_middle_east, aes(x = year, y = eco_footprint, colour = country))+
+  geom_line()
+
+
+hpi_africa <- filter(hpi_data, region == "Africa")
+
+ggplot(data = hpi_africa, aes(x = year, y = eco_footprint, colour = country))+
+  geom_line()
+```
+---
+
+```{r eco-gdp-3, echo=FALSE, warning=FALSE}
+target = c("Middle East", "Africa", "Western Europe")
+
+gdp_3 <- filter(hpi_data, region == target, year == 2019)
+
+ggplot(data = gdp_3, aes(x = country, y = gdp, fill = region, group = region))+
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90))
+```
+---
 class: inverse, center, middle
 
 # Well-being
