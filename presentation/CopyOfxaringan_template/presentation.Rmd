@@ -105,11 +105,11 @@ class: center, middle
 
 --
 
-- 'happy' as in well-being
+- Our well-being
 
 --
 
-- 'happy' as in respectful of the environment
+- The envirnoment's well-being
 
 ---
 
@@ -152,17 +152,46 @@ class: inverse, center, middle
 
 class: center, middle
 
-```{r gdp-hpi plot, echo=FALSE, warning=FALSE}
-hpi_data %>%
+```{r gdp-hpi plot, echo=FALSE, message =FALSE, warning=FALSE}
+summarised_gdp_hpi <- hpi_data %>%
   filter(year != 2020) %>%
-  ggplot(aes(x = gdp, y = hpi, colour = region)) +
-  geom_point(alpha = 0.3) +
+  group_by(country, region) %>%
+  summarise(avg_gdp = median(gdp), 
+            avg_life_years = mean(happy_life_years, 
+                                  rm.na = TRUE),
+            hpi = mean(hpi))
+
+summarised_gdp_hpi %>%
+  ggplot(aes(x = avg_gdp, y = hpi, colour = region)) +
+  geom_point() +
   theme_minimal()
 ```
 
 ---
 
-# Text
+class: center, middle
+
+```{r happy life years and gdp plot, echo=FALSE, warning=FALSE}
+summarised_gdp_hpi %>%
+  ggplot(aes(x = avg_gdp, y = avg_life_years, color = region)) +   geom_point() 
+```
+
+---
+
+class: center, middle
+
+```{r happy life years and gdp plots, echo=FALSE, warning=FALSE}
+summarised_gdp_hpi %>%
+  ggplot(aes(x = avg_gdp, y = avg_life_years, 
+             colour = region)) +
+  geom_point() +
+  geom_smooth(method = "lm", 
+              formula = y~x,
+              se =  FALSE,
+              colour = "black") +
+  facet_wrap(~region, nrow = 2) +
+  theme(legend.position = "bottom")
+```
 
 ---
 

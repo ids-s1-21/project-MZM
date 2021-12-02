@@ -227,8 +227,6 @@ ggplot(data = hpi_western_europe, aes(x = year, y = eco_footprint, colour = coun
 
 
 ```{r eco-analysis-africa}
-hpi_africa <- filter(hpi_data, region == "Africa")
-
 ggplot(data = hpi_africa, aes(x = year, y = eco_footprint, colour = country))+
   geom_line()
 ```
