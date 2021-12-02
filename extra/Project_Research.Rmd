@@ -115,8 +115,12 @@ summarised_gdp_hpi %>%
   ggplot(aes(x = avg_gdp, y = avg_life_years, 
              colour = region)) +
   geom_point() +
-  geom_abline(aes(slope = 0.000517, intercept = 27.7)) +
-  facet_wrap(~region)
+  geom_smooth(method = "lm", 
+              formula = y~x,
+              se =  FALSE,
+              colour = "black") +
+  facet_wrap(~region, nrow = 2) +
+  theme(legend.position = "bottom")
 ```
 
 ```{r lm for South Asia}
