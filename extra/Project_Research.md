@@ -1,14 +1,14 @@
 Project_Research
 ================
 MZM
-2021-12-01
+2021-12-02
 
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 
     ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-    ## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
-    ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-    ## ✓ readr   2.0.0     ✓ forcats 0.5.1
+    ## ✓ tibble  3.1.6     ✓ dplyr   1.0.7
+    ## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+    ## ✓ readr   2.1.0     ✓ forcats 0.5.1
 
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
@@ -36,14 +36,14 @@ MZM
     ##   method                   from   
     ##   required_pkgs.model_spec parsnip
 
-    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.3 ──
+    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──
 
-    ## ✓ broom        0.7.9      ✓ rsample      0.1.0 
-    ## ✓ dials        0.0.9      ✓ tune         0.1.6 
-    ## ✓ infer        0.5.4      ✓ workflows    0.2.3 
+    ## ✓ broom        0.7.10     ✓ rsample      0.1.1 
+    ## ✓ dials        0.0.10     ✓ tune         0.1.6 
+    ## ✓ infer        1.0.0      ✓ workflows    0.2.4 
     ## ✓ modeldata    0.1.1      ✓ workflowsets 0.1.0 
-    ## ✓ parsnip      0.1.7      ✓ yardstick    0.0.8 
-    ## ✓ recipes      0.1.16
+    ## ✓ parsnip      0.1.7      ✓ yardstick    0.0.9 
+    ## ✓ recipes      0.1.17
 
     ## ── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
     ## x broom::bootstrap() masks modelr::bootstrap()
@@ -56,7 +56,7 @@ MZM
     ## x yardstick::rmse()  masks modelr::rmse()
     ## x yardstick::spec()  masks readr::spec()
     ## x recipes::step()    masks stats::step()
-    ## • Use tidymodels_prefer() to resolve common conflicts.
+    ## • Dig deeper into tidy modeling with R at https://www.tmwr.org
 
     ## Warning in eval(substitute(list(...)), `_data`, parent.frame()): NAs introduced
     ## by coercion
@@ -270,7 +270,7 @@ df <- data_frame(x = c(1,2), y = c(2,4))
     ## Warning: `data_frame()` was deprecated in tibble 1.1.0.
     ## Please use `tibble()` instead.
     ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 
 ``` r
 ggplot(df, aes(x = x, y = y)) +
@@ -308,3 +308,31 @@ ggplot(data = hpi_africa, aes(x = year, y = eco_footprint, colour = country))+
     ## Warning: Removed 24 row(s) containing missing values (geom_path).
 
 ![](Project_Research_files/figure-gfm/eco-analysis-africa-1.png)<!-- -->
+
+``` r
+target = c("Middle East", "Africa", "Western Europe")
+
+gdp_3 <- filter(hpi_data, region == target, year == 2019)
+```
+
+    ## Warning in region == target: longer object length is not a multiple of shorter
+    ## object length
+
+``` r
+ggplot(data = gdp_3, aes(x = country, y = gdp, fill = region, group = region))+
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+![](Project_Research_files/figure-gfm/eco-gdp-1.png)<!-- -->
+
+From 2016 to 2019 most countries have an increasing or steady ecological
+footprint but from 2019 to 2020 we see a decline from virtually every
+nation observed. This is not only a trend followed by similar countries
+as the gdp of countries in these regions vary significantly with africa
+being a lot lower than the rest. There are many possible reasons for
+this change but most obvious would be covid. The large scale closures
+and lockdowns would have led to less resources being required thus
+lowering countries ecological footprint. Other reasons could be
+governments being more proactive about climate change but this would not
+explain how wide spread this decrease is.

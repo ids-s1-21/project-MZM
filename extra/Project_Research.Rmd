@@ -233,7 +233,7 @@ ggplot(data = hpi_africa, aes(x = year, y = eco_footprint, colour = country))+
   geom_line()
 ```
 
-```{r eco-analysis-middle-east}
+```{r eco-gdp}
 target = c("Middle East", "Africa", "Western Europe")
 
 gdp_3 <- filter(hpi_data, region == target, year == 2019)
