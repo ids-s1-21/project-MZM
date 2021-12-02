@@ -201,7 +201,7 @@ class: inverse, center, middle
 
 # Ecology
 ```{r eco-gdp, echo=FALSE, warning=FALSE}
-  ggplot(data = hpi_data, aes(x = gdp, y = eco_footprint, group = country, colour = gdp))+
+  ggplot(data = hpi_data, aes(x = gdp, y = eco_footprint, group = country, colour = region))+
   geom_jitter()
 ```
 ---

@@ -233,7 +233,7 @@ ggplot(data = hpi_western_europe, aes(x = year, y = eco_footprint, colour = coun
 ```
 
 ```{r eco-gdp}
-  ggplot(data = hpi_data, aes(x = gdp, y = eco_footprint, group = country, colour = gdp))+
+  ggplot(data = hpi_data, aes(x = gdp, y = eco_footprint, group = country, colour = region))+
   geom_jitter()
 ```
 
