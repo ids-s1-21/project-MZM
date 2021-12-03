@@ -52,24 +52,25 @@ expected. This is to be expected from a data set like this since
 countries and regions vary wildly due to culture, politics, beliefs and
 much more.
 
-Well-being analysis Overall, the graphs, shown in eight different
-regions, indicate that wellbeing measure in all regions are quite
-similar within each other throughout the years. Therefore, unlike
-ecological footprint, surprisingly, at least for me, we cannot say that
-COVID-19 has had a dramatic impact on people’s well-being around the
-world. Looking deeper into the graphs, Western Europe and North America
-& Oceania show the highest measures of well-being. Whereas, Africa and
-South Asia exhibit lower well-being measures compared to the rest.
-Furthermore, the two characteristics that stand out from the graph are
-from North America & Oceania and South Asia. Countries in north America
-& Oceania display very little variation in there data resulting in a
-much shorter range compared to other regions. South Asia on the other
-hand, have quite a lot of differences between their well-being measures
-that produces this variety of violin figures. Specifically, in 2019
-there is a clear drop in well-being. This comes from the low data entry
-of Afghanistan. The violin plot in 2020 goes back to it’s average
-measure, however, this might be because Afghanistan does not have any
-data that year.
+Well-being analysis
+
+Overall, the graphs, shown in eight different regions, indicate that
+wellbeing measure in all regions are quite similar within each other
+throughout the years. Therefore, unlike ecological footprint,
+surprisingly, at least for me, we cannot say that COVID-19 has had a
+dramatic impact on people’s well-being around the world. Looking deeper
+into the graphs, Western Europe and North America & Oceania show the
+highest measures of well-being. Whereas, Africa and South Asia exhibit
+lower well-being measures compared to the rest. Furthermore, the two
+characteristics that stand out from the graph are from North America &
+Oceania and South Asia. Countries in north America & Oceania display
+very little variation in there data resulting in a much shorter range
+compared to other regions. South Asia on the other hand, have quite a
+lot of differences between their well-being measures that produces this
+variety of violin figures. Specifically, in 2019 there is a clear drop
+in well-being. This comes from the low data entry of Afghanistan. The
+violin plot in 2020 goes back to it’s average measure, however, this
+might be because Afghanistan does not have any data that year.
 
 Conclusion
 
@@ -89,16 +90,15 @@ associated with it.
 ## Presentation
 
 Our presentation can be found
-[here](presentation/CopyOfXaringan_template/presentation.html).
+[here](presentation/CopyOfxaringan_template/presentation.html).
 
 ## Data
 
-Include a citation for your data here. See
-<http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840> for guidance
-on proper citation for datasets. If you got your data off the web, make
-sure to note the retrieval date.
+Happy Planet Index(URL) - Abdallah, S., Abrar, R. & Marks, N. (2021),
+*The Happy Planet Index 2021*, data file, Wellbeing Economy Alliance,
+viewed 25 October 2021, \<www.happyplanetindex.org>
 
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+Data Source - <https://happyplanetindex.org> HPI Methodology Paper -
+<https://happyplanetindex.org/wp-content/themes/hpi/public/downloads/happy-planet-index-methodology-paper.pdf>
