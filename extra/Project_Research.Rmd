@@ -241,20 +241,6 @@ ggplot(data = gdp_3, aes(x = country, y = gdp, fill = region, group = region))+
   theme(axis.text.x = element_text(angle = 90)) 
 ```
 
-```{r eco ahhhhh}
-hpi_data %>%
-  ggplot(aes(x = year, y = eco_footprint, group = year)) +
-  geom_violin() +
-  facet_wrap(~region)
-
-hpi_data %>%
-  group_by(year) %>%
-  summarise(eco_avg = mean(eco_footprint, na.rm = TRUE)) %>%
-  ggplot(aes(x = year, y = eco_avg)) +
-  geom_col( )
-```
-
-
 From 2016 to 2019 most countries have an increasing or steady ecological footprint but from
 2019 to 2020 we see a decline from virtually every nation observed. 
 This is not only a trend followed by similar countries as the gdp of countries in

@@ -4,124 +4,73 @@ by MZM
 
 ## Summary
 
-In our project we aim to show how different countries compare against
-one another in multiple variables, one of which being the ‘Happy Planet
-Index’. This will help us understand which regions or countries are able
-to provide a good living standard while also having a healthy
-environmental footprint. Our data is from a data set named the ‘Happy
-Planet Index’ which has taken most countries and used their social
-happiness, environmental impact and also inequalities and differences of
-the countries people. Some important variables to know are the ‘Happy
-Planet Index’ which is a combination of a countries inequalities of
-living, their environmental impact and their peoples happiness. ‘Happy
-Life Years’ is the amount of years a person can expect to be enjoyable
-and less stressful in the given country. ‘Inequality adjusted life
-expectancy’ is life expectancy but is when you take in to account the
-different living standards of different groups, different incomes,
-different ethnicity and others. The data set was compiled using many
-open polls and data sets from the UN, York University and others.
+Introduction
 
-We have analysed our data through three categories: geographic, economic
-and mental health. The first category contains variables population,
-ecological footprint and location (continent). Our second category
-compares values using variables average well-being,happy life
-years,inequality of outcomes, inequality-adjusted life expectancy, and
-inequality-adjusted well-being.
+We are examining the following question: What makes a country ‘happy’?
+We define happiness in terms of our well-being and the well-being of the
+planet, as both factors are essential to create long lasting happiness.
+To answer our question we look at the Happy Planet Index dataset, which
+collects data about countries around the world and compares them by
+calculating their happy planet index (hpi), which is a combined measure
+of life expectancy, reported happiness and ecological footprint of a
+country. We also aim to consider the impact of the covid pandemic on
+countries’ hpi scores.
 
-We will examine the changes within these three categories through years
-2015 to 2020 and compare specifically years 2015-2019 and 2020 to
-understand the effects of the pandemic on the countries’ happy planet
-indexes.
+We have decided to examine our data under three categories which we
+believe affect hpi scores of countries, these categories being -
+*Economic*, *Wellbeing*, and *Ecological*.
 
-Write-up of your project and findings go here. Think of this as the text
-of your presentation. The length should be roughly 5 minutes when read
-out loud. Although pacing varies, a 5-minute speech is roughly 750
-words. To use the word count addin, select the text you want to count
-the words of (probably this is the Summary section of this document, go
-to Addins, and select the `Word count` addin). This addin counts words
-using two different algorithms, but the results should be similar and as
-long as you’re in the ballpark of 750 words, you’re good! The addin will
-ignore code chunks and only count the words in prose.
+Economic Analysis
 
-You can also load your data here and present any analysis results /
-plots, but I strongly urge you to keep that to a minimum (maybe only the
-most important graphic, if you have one you can choose). And make sure
-to hide your code with `echo = FALSE` unless the point you are trying to
-make is about the code itself. Your results with proper output and
-graphics go in your presentation, this space is for a brief summary of
-your project.
+Countries with highest hpi have neither very high nor very low gdp per
+capita. Moreover when gdp per capita is plotted against happy life years
+(a measure which combines life expectancy and well-being to assess life
+quality) we see that the relationship is logarithmic, therefore if our
+aim is to try to increase global happiness we should invest money in the
+poorest nations as this would bring about the biggest change. Also
+mention the dangerous of splitting up data and fitting separate linear
+models over these groupings - a way to introduce error in analysis that
+should be addressed but we weren’t taught how to in the course.
 
-Eco Analysis
+Ecological Analysis
 
-From 2016 to 2019 most countries have an increasing or steady ecological footprint but from
-2019 to 2020 we see a decline from virtually every nation observed. 
-This is not only a trend followed by similar countries as the gdp of countries in
-these regions vary significantly with africa being a lot lower than the rest. There are 
-many possible reasons for this change but most obvious would be covid.
-The large scale closures and lockdowns would have led to less resources being required
-thus lowering countries ecological footprint. Other reasons could be governments being
-more proactive about climate change but this would not explain how wide spread this
-decrease is.
+From 2016 to 2019 most countries have an increasing or steady ecological
+footprint but from 2019 to 2020 we see a decline from virtually every
+nation observed. This is not only a trend followed by similar countries
+as the gdp of countries in these regions vary significantly with africa
+being a lot lower than the rest. There are many possible reasons for
+this change but most obvious would be covid. The large scale closures
+and lockdowns would have led to less resources being required thus
+lowering countries ecological footprint. Other reasons could be
+governments being more proactive about climate change but this would not
+explain how wide spread this decrease is.
 
-We can also observe that in general the higher a nations gdp the higher the eco footprint but
-looking at east asia and europe tells a different story where there seems to be no link or
-the opposite of what is expected. This is to be expected from a data set like this since 
-countries and regions vary wildly due to culture, politics, beliefs and much more.
+We can also observe that in general the higher a nations gdp the higher
+the eco footprint but looking at east asia and europe tells a different
+story where there seems to be no link or the opposite of what is
+expected. This is to be expected from a data set like this since
+countries and regions vary wildly due to culture, politics, beliefs and
+much more.
 
 Conclusion
 
-In conclusion we can see that there are many different factors that can affect the happiness,
-wealth and eco-friendliness of a nation and each of these are also affected by outside forces
-such as a pandemic or more awareness of problems. It is also clear that countries need many
-positive characteristics to rank highly on the HPI and contribute to a happier world. When
-comparing many regions and even countries it is always important to keep in mind trends and
-other anomalies that are created due to possibly political or cultural diversity between
-these regions and other factors. What we have managed to show is that there are clear trends
-in the data but also anomalies but ultimately we have shown what is required to create a 
-happy planet and trends that are associated with it.
-    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-
-    ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-    ## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
-    ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-    ## ✓ readr   2.0.0     ✓ forcats 0.5.1
-
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-    ## 
-    ## Attaching package: 'janitor'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     chisq.test, fisher.test
-
-    ## Warning in eval(substitute(list(...)), `_data`, parent.frame()): NAs introduced
-    ## by coercion
-
-``` r
-glimpse(hpi_data)
-```
-
-    ## Rows: 760
-    ## Columns: 12
-    ## $ hpi_rank      <dbl> 1, NA, 3, 8, 2, 6, 10, 4, 9, NA, 12, 21, 13, 23, 20, 7, …
-    ## $ country       <chr> "Costa Rica", "Vanuatu", "Colombia", "Switzerland", "Ecu…
-    ## $ iso           <chr> "CRI", "VUT", "COL", "CHE", "ECU", "PAN", "JAM", "GTM", …
-    ## $ region        <dbl> 1, 8, 1, 3, 1, 1, 1, 1, 1, 1, 2, 8, 1, 3, 1, 1, 7, 3, 1,…
-    ## $ pop_1000s     <dbl> 4899.336, 278.326, 48175.048, 8379.915, 16491.116, 4037.…
-    ## $ life_exp      <dbl> 79.7, 70.0, 76.7, 83.3, 76.4, 78.0, 74.2, 73.5, 74.7, 77…
-    ## $ wellbeing     <dbl> 7.135618, 6.712810, 6.233715, 7.458520, 6.115438, 6.1176…
-    ## $ eco_footprint <dbl> 2.7101425, NA, 2.0414124, 4.6007449, 1.6910607, 2.260211…
-    ## $ hpi           <dbl> 62.37983, NA, 58.14679, 56.11938, 59.53255, 56.93162, 55…
-    ## $ biocapacity   <dbl> 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1…
-    ## $ gdp           <dbl> 19211.567, 3061.787, 14242.807, 66344.075, 11551.617, 29…
-    ## $ year          <dbl> 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 20…
+In conclusion we can see that there are many different factors that can
+affect the happiness, wealth and eco-friendliness of a nation and each
+of these are also affected by outside forces such as a pandemic or more
+awareness of problems. It is also clear that countries need many
+positive characteristics to rank highly on the HPI and contribute to a
+happier world. When comparing many regions and even countries it is
+always important to keep in mind trends and other anomalies that are
+created due to possibly political or cultural diversity between these
+regions and other factors. What we have managed to show is that there
+are clear trends in the data but also anomalies but ultimately we have
+shown what is required to create a happy planet and trends that are
+associated with it.
 
 ## Presentation
 
-Our presentation can be found [here](presentation/presentation.html).
+Our presentation can be found
+[here](presentation/CopyOfXaringan_template/presentation.html).
 
 ## Data
 

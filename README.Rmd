@@ -5,81 +5,53 @@ output: github_document
 ---
 
 ## Summary
-In our project we aim to show how different countries compare against one another in multiple variables, one of which being the 'Happy Planet Index'. This will help us understand which regions or countries are able to provide a good living standard while also having a healthy environmental footprint. Our data is from a data set named the 'Happy Planet Index' which has taken most countries and used their social happiness, environmental impact and also inequalities and differences of the countries people. Some important variables to know are the 'Happy Planet Index' which is a combination of a countries inequalities of living, their environmental impact and their peoples happiness. 'Happy Life Years' is the amount of years a person can expect to be enjoyable and less stressful in the given country. 'Inequality adjusted life expectancy' is life expectancy but is when you take in to account the different living standards of different groups, different incomes, different ethnicity and others. The data set was compiled using many open polls and data sets from the UN, York University and others.
 
-We have analysed our data through three categories: geographic, economic and mental health. The first category contains variables population, ecological footprint and location (continent). Our second category compares values using variables average well-being,happy life years,inequality of outcomes, inequality-adjusted life expectancy, and inequality-adjusted well-being. 
+Introduction
 
-We will examine the changes within these three categories through years 2015 to 2020 and compare specifically years 2015-2019 and 2020 to understand the effects of the pandemic on the countries' happy planet indexes.
+We are examining the following question: What makes a country 'happy'?
+We define happiness in terms of our well-being and the well-being of the planet, as both factors are essential to create long lasting happiness.
+To answer our question we look at the Happy Planet Index dataset, which collects data about countries around the world and compares them by calculating their happy planet index (hpi), which is a combined measure of life expectancy, reported happiness and ecological footprint of a country. 
+We also aim to consider the impact of the covid pandemic on countries' hpi scores.
 
+We have decided to examine our data under three categories which we believe affect hpi scores of countries, these categories being - *Economic*, *Wellbeing*, and *Ecological*.
 
+Economic Analysis
 
-Write-up of your project and findings go here. 
-Think of this as the text of your presentation. 
-The length should be roughly 5 minutes when read out loud.
-Although pacing varies, a 5-minute speech is roughly 750 words. 
-To use the word count addin, select the text you want to count the words of (probably this is the 
-Summary section of this document, go to Addins, and select the `Word count` addin).
-This addin counts words using two different algorithms, but the results should be similar and as long as you're in the ballpark of 750 words, you're good! 
-The addin will ignore code chunks and only count the words in prose.
+Countries with highest hpi have neither very high nor very low gdp per capita.
+Moreover when gdp per capita is plotted against happy life years (a measure which combines life expectancy and well-being to assess life quality) we see that the relationship is logarithmic, therefore if our aim is to try to increase global happiness we should invest money in the poorest nations as this would bring about the biggest change. Also mention the dangerous of splitting up data and fitting separate linear models over these groupings - a way to introduce error in analysis that should be addressed but we weren't taught how to in the course.
 
-You can also load your data here and present any analysis results / plots, but I strongly urge you to keep that to a minimum (maybe only the most important graphic, if you have one you can choose). 
-And make sure to hide your code with  `echo = FALSE` unless the point you are trying to make is about the code itself.
-Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
+Ecological Analysis
 
-```{r load-data, echo = FALSE}
-library(tidyverse)
-library(janitor)
-library(readxl)
+From 2016 to 2019 most countries have an increasing or steady ecological footprint but from
+2019 to 2020 we see a decline from virtually every nation observed. 
+This is not only a trend followed by similar countries as the gdp of countries in
+these regions vary significantly with africa being a lot lower than the rest. There are 
+many possible reasons for this change but most obvious would be covid.
+The large scale closures and lockdowns would have led to less resources being required
+thus lowering countries ecological footprint. Other reasons could be governments being
+more proactive about climate change but this would not explain how wide spread this
+decrease is.
 
-hpi_2016 <- read_excel("/cloud/project/data/hpi_2016_data.xlsx") %>% 
-  clean_names()
-hpi_2017 <- read_excel("/cloud/project/data/hpi_2017_data.xlsx") %>% 
-  clean_names()
-hpi_2018 <- read_excel("/cloud/project/data/hpi_2018_data.xlsx") %>% 
-  clean_names()
-hpi_2019 <- read_excel("/cloud/project/data/hpi_2019_data.xlsx") %>% 
-  clean_names()
-hpi_2020 <- read_excel("/cloud/project/data/hpi_2020_data.xlsx") %>% 
-  clean_names()
-```
+We can also observe that in general the higher a nations gdp the higher the eco footprint but
+looking at east asia and europe tells a different story where there seems to be no link or
+the opposite of what is expected. This is to be expected from a data set like this since 
+countries and regions vary wildly due to culture, politics, beliefs and much more.
 
-```{r cleaning-data, echo = FALSE}
-hpi_2016 <- hpi_2016 %>%
-  mutate(year = 2016)
-hpi_2017 <- hpi_2017 %>%
-  mutate(year = 2017)
-hpi_2018 <- hpi_2018 %>%
-  mutate(year = 2018)
-hpi_2019 <- hpi_2019 %>%
-  mutate(year = 2019)
-hpi_2020 <- hpi_2020 %>%
-  mutate(year = 2020)
+Conclusion
 
-#The idea to use bind_rows came from the following post on StackOverflow: https://stackoverflow.com/questions/48444790/tidydata-combining-two-dataset-from-different-years-r-to-make-a-tidy-data-se
-hpi_data <- bind_rows(hpi_2016, hpi_2017)
-hpi_data <- bind_rows(hpi_data, hpi_2018)
-hpi_data <- bind_rows(hpi_data, hpi_2019)
-hpi_data <- bind_rows(hpi_data, hpi_2020)
-
-hpi_data <- hpi_data %>%
-  rename("pop_1000s"     = population_thousands,
-         "life_exp"      = life_expectancy_years,
-         "wellbeing"     = ladder_of_life_wellbeing_0_10,
-         "eco_footprint" = ecological_footprint_g_ha,
-         "biocapacity"   = biocapacity_for_year_g_ha,
-         "gdp"           = gdp_per_capita,
-         "region"        = continent) %>%
-  transform(gdp = as.numeric(gdp))
-  
-```
-
-```{r glimpse data}
-glimpse(hpi_data)
-```
+In conclusion we can see that there are many different factors that can affect the happiness,
+wealth and eco-friendliness of a nation and each of these are also affected by outside forces
+such as a pandemic or more awareness of problems. It is also clear that countries need many
+positive characteristics to rank highly on the HPI and contribute to a happier world. When
+comparing many regions and even countries it is always important to keep in mind trends and
+other anomalies that are created due to possibly political or cultural diversity between
+these regions and other factors. What we have managed to show is that there are clear trends
+in the data but also anomalies but ultimately we have shown what is required to create a 
+happy planet and trends that are associated with it.
 
 ## Presentation
 
-Our presentation can be found [here](presentation/presentation.html).
+Our presentation can be found [here](presentation/CopyOfXaringan_template/presentation.html).
 
 ## Data 
 
