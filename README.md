@@ -70,16 +70,15 @@ associated with it.
 ## Presentation
 
 Our presentation can be found
-[here](presentation/CopyOfXaringan_template/presentation.html).
+[here](presentation/CopyOfxaringan_template/presentation.html).
 
 ## Data
 
-Include a citation for your data here. See
-<http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840> for guidance
-on proper citation for datasets. If you got your data off the web, make
-sure to note the retrieval date.
+Happy Planet Index(URL) - Abdallah, S., Abrar, R. & Marks, N. (2021),
+*The Happy Planet Index 2021*, data file, Wellbeing Economy Alliance,
+viewed 25 October 2021, \<www.happyplanetindex.org>
 
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+Data Source - <https://happyplanetindex.org> HPI Methodology Paper -
+<https://happyplanetindex.org/wp-content/themes/hpi/public/downloads/happy-planet-index-methodology-paper.pdf>
