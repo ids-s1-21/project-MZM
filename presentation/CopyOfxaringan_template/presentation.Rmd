@@ -272,7 +272,7 @@ class: inverse, center, middle
 library(ggplot2)
 library(dplyr)
 library(ggthemes)
-graph3 <- hpi_data %>%
+graph3 <- hpi_data %>% 
   ggplot(aes(x = year, y = wellbeing, group = year)) +
   geom_violin(trim = FALSE) +
   facet_wrap(~region) +
@@ -290,6 +290,7 @@ graph3 <- hpi_data %>%
 
 ```{r wellbeing-year animation, echo=FALSE}
 library(gganimate)
+library(gifski)
 graph3.animation <- graph3 + 
   transition_states(year, wrap= FALSE) +
   shadow_mark(alpha = 0.5) +
@@ -297,12 +298,16 @@ graph3.animation <- graph3 +
   exit_fade() +
   ease_aes('back-out')
 
-animate(graph3.animation, end_pause = 60)
+animate(graph3.animation, end_pause = 60, renderer = gifski_renderer())
+anim_save("wellbeing graph 3.gif")
+
 ```
 
 ```{r wellbeing-life_exp plot, echo=FALSE}
-graph1 <- hpi_data %>% 
-  ggplot(aes(x = wellbeing, y=life_exp, colour = region, size = pop_1000s)) +     geom_point(alpha= 0.9, stroke = 0) +
+graph1 <- hpi_data_clean %>% 
+  ggplot(aes(x = wellbeing, y=life_exp, colour = region, 
+             size = pop_1000s)) +     
+  geom_point(alpha= 0.9, stroke = 0) +
   scale_size(range = c(2, 12), guide = "none") +
   scale_x_log10() +
   labs(title = "Life Expectancy vs Wellbeing by Region",
@@ -317,11 +322,11 @@ graph1 <- hpi_data %>%
 ```{r wellbeing-life_exp animation, echo=FALSE, eval=FALSE}
 graph1.animation <- graph1 + 
   transition_time(year) +
-  labs(subtitle = "Year: {frame_time}") +
+  labs(subtitle = "Year: {frame_time}") + ease_aes('linear') +
   shadow_wake(wake_length = 0.3)
 
 animate(graph1.animation, height= 500, width = 800, fps = 30, duration = 10,
-        end_pause = 60, res = 100)
+        end_pause = 60, res = 100, renderer = gifski_renderer())
 
 anim_save("wellbeing graph 1.gif")
 ```
@@ -356,9 +361,10 @@ graph2.animation <- graph2 +
   view_follow(fixed_y = TRUE)
 
 animate(graph2.animation, height= 500, width = 800, fps = 30, duration = 10,
-        end_pause = 60, res = 100)
+        end_pause = 60, res = 100, renderer = gifski_renderer())
 
 anim_save("wellbeing graph 2.gif")
+
 ```
 
 ---
