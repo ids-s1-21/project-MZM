@@ -290,6 +290,8 @@ graph3 <- hpi_data %>%
 ```
 
 ```{r wellbeing-year animation, echo=FALSE}
+library(gganimate)
+library(gifski)
 graph3.animation <- graph3 + 
   transition_states(year, wrap= FALSE) +
   shadow_mark(alpha = 0.5) +
@@ -305,7 +307,9 @@ anim_save("wellbeing graph 3.gif")
 ```{r wellbeing-life_exp plot, echo=FALSE}
 hpi_data_clean <- na.omit(hpi_data)
 graph1 <- hpi_data_clean %>% 
-  ggplot(aes(x = wellbeing, y=life_exp, colour = region, size = pop_1000s)) +     geom_point(alpha= 0.9, stroke = 0) +
+  ggplot(aes(x = wellbeing, y=life_exp, colour = region, 
+             size = pop_1000s)) +     
+  geom_point(alpha= 0.9, stroke = 0) +
   scale_size(range = c(2, 12), guide = "none") +
   scale_x_log10() +
   labs(title = "Life Expectancy vs Wellbeing by Region",
