@@ -292,15 +292,15 @@ graph3 <- hpi_data %>%
 ```{r wellbeing-year animation, echo=FALSE}
 library(gganimate)
 library(gifski)
-graph3.animation <- graph3 + 
-  transition_states(year, wrap= FALSE) +
-  shadow_mark(alpha = 0.5) +
-  enter_grow() +
-  exit_fade() +
-  ease_aes('back-out')
+#graph3.animation <- graph3 + 
+  #transition_states(year, wrap= FALSE) +
+  #shadow_mark(alpha = 0.5) +
+  #enter_grow() +
+  #exit_fade() +
+  #ease_aes('back-out')
 
-animate(graph3.animation, end_pause = 60, renderer = gifski_renderer())
-anim_save("wellbeing graph 3.gif")
+#animate(graph3.animation, end_pause = 60, renderer = gifski_renderer())
+#anim_save("wellbeing graph 3.gif")
 
 ```
 
@@ -322,15 +322,15 @@ graph1 <- hpi_data_clean %>%
 ```
 
 ```{r wellbeing-life_exp animation, echo=FALSE, eval=FALSE}
-graph1.animation <- graph1 + 
-  transition_time(year) +
-  labs(subtitle = "Year: {frame_time}") + ease_aes('linear') +
-  shadow_wake(wake_length = 0.3)
+#graph1.animation <- graph1 + 
+  #transition_time(year) +
+  #labs(subtitle = "Year: {frame_time}") + ease_aes('linear') +
+  #shadow_wake(wake_length = 0.3)
 
-animate(graph1.animation, height= 500, width = 800, fps = 30, duration = 10,
-        end_pause = 60, res = 100, renderer = gifski_renderer())
+#animate(graph1.animation, height= 500, width = 800, fps = 30, duration = 10,
+        #end_pause = 60, res = 100, renderer = gifski_renderer())
 
-anim_save("wellbeing graph 1.gif")
+#anim_save("wellbeing graph 1.gif")
 ```
 
 ```{r wellbeing-eco plot, echo=FALSE}
@@ -358,14 +358,14 @@ graph2 <- hpi_data_clean %>%
 ```
 
 ```{r wellbeing-eco animation, echo=FALSE}
-graph2.animation <- graph2 +
-  transition_reveal(eco_footprint) +
-  view_follow(fixed_y = TRUE)
+#graph2.animation <- graph2 +
+  #transition_reveal(eco_footprint) +
+  #view_follow(fixed_y = TRUE)
 
-animate(graph2.animation, height= 500, width = 800, fps = 30, duration = 10,
-        end_pause = 60, res = 100, renderer = gifski_renderer())
+#animate(graph2.animation, height= 500, width = 800, fps = 30, duration = 10,
+        #end_pause = 60, res = 100, renderer = gifski_renderer())
 
-anim_save("wellbeing graph 2.gif")
+#anim_save("wellbeing graph 2.gif")
 
 ```
 
