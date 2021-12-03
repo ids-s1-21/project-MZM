@@ -70,7 +70,14 @@ lot of differences between their well-being measures that produces this
 variety of violin figures. Specifically, in 2019 there is a clear drop
 in well-being. This comes from the low data entry of Afghanistan. The
 violin plot in 2020 goes back to it’s average measure, however, this
-might be because Afghanistan does not have any data that year.
+might be because Afghanistan does not have any data that year. Secondly,
+when comparing life expectancy and well being, it can be stated that
+Africa has both the lowest life expectancy and well-being values. On the
+other hand, Western Europe show very high data on both variables. The
+third graph shows ecological footprint vs well being measures. Even
+though a lot of them show fluctuation all regions generally show
+positive correlation between the two variables. As ecological footprint
+goes up, well-being increases.
 
 Conclusion
 
