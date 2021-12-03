@@ -273,7 +273,8 @@ library(ggplot2)
 library(dplyr)
 library(ggthemes)
 library(gifski)
-graph3 <- hpi_data %>% 
+#graph3 <- 
+  hpi_data %>% 
   ggplot(aes(x = year, y = wellbeing, group = year)) +
   geom_violin(trim = FALSE) +
   facet_wrap(~region) +
@@ -306,7 +307,8 @@ library(gifski)
 
 ```{r wellbeing-life_exp plot, echo=FALSE}
 hpi_data_clean <- na.omit(hpi_data)
-graph1 <- hpi_data_clean %>% 
+#graph1 <- 
+  hpi_data_clean %>% 
   ggplot(aes(x = wellbeing, y=life_exp, colour = region, 
              size = pop_1000s)) +     
   geom_point(alpha= 0.9, stroke = 0) +
@@ -335,7 +337,8 @@ graph1 <- hpi_data_clean %>%
 
 ```{r wellbeing-eco plot, echo=FALSE}
 hpi_data_clean <- na.omit(hpi_data)
-graph2 <- hpi_data_clean %>%
+#graph2 <-
+  hpi_data_clean %>%
   ggplot(aes(x = eco_footprint, y = wellbeing, group = year, color= region)) +
   geom_line(size= 2, alpha = 0.75) +
   theme_solarized_2(light= FALSE) +
@@ -355,6 +358,7 @@ graph2 <- hpi_data_clean %>%
   scale_color_brewer(palette = "Pastel1") +
   geom_point() +
   scale_x_continuous(breaks = 0:2100)
+
 ```
 
 ```{r wellbeing-eco animation, echo=FALSE}
