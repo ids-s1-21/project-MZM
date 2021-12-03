@@ -212,10 +212,10 @@ hpi_data %>%
 ```
 
 ```{r eco-analysis-middle-east}
-hpi_middle_east <- filter(hpi_data, region == "Middle East", eco_footprint > 3)
-
-ggplot(data = hpi_middle_east, aes(x = year, y = eco_footprint, colour = country))+
-  geom_line()
+hpi_3 <- filter(hpi_data, region == c("Africa", "Middle East", "Western Europe"))
+ggplot(data = hpi_3, aes(x = year, y = eco_footprint, group = country))+
+  geom_line()+
+  facet_wrap(~region, nrow = 1)
 ```
 
 
@@ -226,6 +226,10 @@ ggplot(data = hpi_western_europe, aes(x = year, y = eco_footprint, colour = coun
   geom_line()
 ```
 
+```{r eco-gdp}
+  ggplot(data = hpi_data, aes(x = gdp, y = eco_footprint, group = country, colour = region))+
+  geom_jitter()
+```
 
 ```{r eco-gdp}
 target = c("Middle East", "Africa", "Western Europe")

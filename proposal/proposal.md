@@ -70,10 +70,120 @@ hpi_data %>%
 
     ## Warning: Removed 75 rows containing non-finite values (stat_ydensity).
 
-![](proposal_files/figure-gfm/wellbeing-time%20plot-1.png)<!-- --> It is
-clear from the graph that people in north america and oceania are the
-happiest about their wellbeing standards and that south asia seems very
-varied but also the least content. There doesn’t seem to be a clear
+![](proposal_files/figure-gfm/wellbeing-time%20plot-1.png)<!-- -->
+
+``` r
+hpi_data %>%
+  ggplot(aes(x = gdp, y = wellbeing, group = year)) +
+  geom_line(trim = FALSE) +
+  facet_wrap(~region) +
+  labs(
+    title = "Wellbeing around the world",
+    subtitle = "Over time",
+    x = "Years",
+    y = "Wellbeing measure"
+  )
+```
+
+    ## Warning: Ignoring unknown parameters: trim
+
+    ## Warning: Removed 152 row(s) containing missing values (geom_path).
+
+![](proposal_files/figure-gfm/wellbeing-time%20plot-2.png)<!-- -->
+
+``` r
+hpi_data %>%
+  ggplot(aes(x = life_exp, y = wellbeing, group = year)) +
+  geom_point(trim = FALSE) +
+  facet_wrap(~region) +
+  labs(
+    title = "Wellbeing around the world",
+    subtitle = "Over time",
+    x = "Life Expectancy",
+    y = "Wellbeing measure"
+  )
+```
+
+    ## Warning: Ignoring unknown parameters: trim
+
+    ## Warning: Removed 81 rows containing missing values (geom_point).
+
+![](proposal_files/figure-gfm/wellbeing-time%20plot-3.png)<!-- -->
+
+``` r
+library(viridis)
+```
+
+    ## Loading required package: viridisLite
+
+    ## 
+    ## Attaching package: 'viridis'
+
+    ## The following object is masked from 'package:scales':
+    ## 
+    ##     viridis_pal
+
+``` r
+library(gganimate)
+```
+
+    ## No renderer backend detected. gganimate will default to writing frames to separate files
+    ## Consider installing:
+    ## - the `gifski` package for gif output
+    ## - the `av` package for video output
+    ## and restarting the R session
+
+``` r
+hpi_data_clean <- na.omit(hpi_data)
+
+p <- ggplot(
+  hpi_data_clean, 
+  aes(x = wellbeing, y=life_exp, size = pop_1000s, colour = country)
+  ) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+  scale_color_viridis(name= "country", discrete = TRUE) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  guides(colour = guide_legend(order = 2), shape = guide_legend(order = 1)) +
+  theme_void() + 
+    theme(legend.position = "bottom", legend.box = "vertical", legend.title.align = 0) +
+    theme(plot.title = element_text(hjust = 0.5, vjust = 0.05)) +
+    theme(plot.caption = element_text(hjust = 0, color="gray40", size=10)) +
+  labs(x = "Wellbeing", y = "Life Expectancy")
+
+animation<- p + transition_states(year,
+                              transition_length = 2,
+                              state_length = 1)
+animation
+```
+
+    ## Warning: No renderer available. Please install the gifski, av, or magick package
+    ## to create animated output
+
+    ## NULL
+
+``` r
+library(reprex)
+file_renderer(dir = ".", prefix = "gganim_plot", overwrite = FALSE)
+```
+
+    ## function (frames, fps) 
+    ## {
+    ##     if (!dir.exists(dir)) 
+    ##         dir.create(dir, showWarnings = FALSE, recursive = TRUE)
+    ##     new_names <- file.path(dir, sub("gganim_plot", prefix, basename(frames)))
+    ##     if (any(!file.copy(frames, new_names, overwrite = overwrite))) {
+    ##         warning("file_renderer failed to copy frames to the destination directory", 
+    ##             call. = FALSE)
+    ##     }
+    ##     invisible(new_names)
+    ## }
+    ## <bytecode: 0x564d124fc0a8>
+    ## <environment: 0x564d0f1088f0>
+
+It is clear from the graph that people in north america and oceania are
+the happiest about their wellbeing standards and that south asia seems
+very varied but also the least content. There doesn’t seem to be a clear
 impact from COVID in the wellbeing of countries.
 
 ``` r

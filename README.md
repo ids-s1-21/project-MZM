@@ -51,6 +51,34 @@ make is about the code itself. Your results with proper output and
 graphics go in your presentation, this space is for a brief summary of
 your project.
 
+Eco Analysis
+
+From 2016 to 2019 most countries have an increasing or steady ecological footprint but from
+2019 to 2020 we see a decline from virtually every nation observed. 
+This is not only a trend followed by similar countries as the gdp of countries in
+these regions vary significantly with africa being a lot lower than the rest. There are 
+many possible reasons for this change but most obvious would be covid.
+The large scale closures and lockdowns would have led to less resources being required
+thus lowering countries ecological footprint. Other reasons could be governments being
+more proactive about climate change but this would not explain how wide spread this
+decrease is.
+
+We can also observe that in general the higher a nations gdp the higher the eco footprint but
+looking at east asia and europe tells a different story where there seems to be no link or
+the opposite of what is expected. This is to be expected from a data set like this since 
+countries and regions vary wildly due to culture, politics, beliefs and much more.
+
+Conclusion
+
+In conclusion we can see that there are many different factors that can affect the happiness,
+wealth and eco-friendliness of a nation and each of these are also affected by outside forces
+such as a pandemic or more awareness of problems. It is also clear that countries need many
+positive characteristics to rank highly on the HPI and contribute to a happier world. When
+comparing many regions and even countries it is always important to keep in mind trends and
+other anomalies that are created due to possibly political or cultural diversity between
+these regions and other factors. What we have managed to show is that there are clear trends
+in the data but also anomalies but ultimately we have shown what is required to create a 
+happy planet and trends that are associated with it.
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 
     ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
