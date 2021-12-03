@@ -6,9 +6,9 @@ MZM
     ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 
     ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-    ## ✓ tibble  3.1.6     ✓ dplyr   1.0.7
-    ## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-    ## ✓ readr   2.1.0     ✓ forcats 0.5.1
+    ## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
+    ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+    ## ✓ readr   2.0.0     ✓ forcats 0.5.1
 
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
@@ -36,14 +36,14 @@ MZM
     ##   method                   from   
     ##   required_pkgs.model_spec parsnip
 
-    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──
+    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.3 ──
 
-    ## ✓ broom        0.7.10     ✓ rsample      0.1.1 
-    ## ✓ dials        0.0.10     ✓ tune         0.1.6 
-    ## ✓ infer        1.0.0      ✓ workflows    0.2.4 
+    ## ✓ broom        0.7.9      ✓ rsample      0.1.0 
+    ## ✓ dials        0.0.9      ✓ tune         0.1.6 
+    ## ✓ infer        0.5.4      ✓ workflows    0.2.3 
     ## ✓ modeldata    0.1.1      ✓ workflowsets 0.1.0 
-    ## ✓ parsnip      0.1.7      ✓ yardstick    0.0.9 
-    ## ✓ recipes      0.1.17
+    ## ✓ parsnip      0.1.7      ✓ yardstick    0.0.8 
+    ## ✓ recipes      0.1.16
 
     ## ── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
     ## x broom::bootstrap() masks modelr::bootstrap()
@@ -56,7 +56,7 @@ MZM
     ## x yardstick::rmse()  masks modelr::rmse()
     ## x yardstick::spec()  masks readr::spec()
     ## x recipes::step()    masks stats::step()
-    ## • Dig deeper into tidy modeling with R at https://www.tmwr.org
+    ## • Use tidymodels_prefer() to resolve common conflicts.
 
     ## Warning in eval(substitute(list(...)), `_data`, parent.frame()): NAs introduced
     ## by coercion
@@ -264,21 +264,18 @@ linear_reg() %>%
     ## 2 avg_gdp      0.000176 0.0000515      3.42 5.10e- 3
 
 ``` r
-df <- data_frame(x = c(1,2), y = c(2,4))
+hpi_data %>%
+  group_by(country, year) %>%
+  summarise(avg_hpi = mean(hpi)) %>%
+  ggplot(aes(x = year, y = avg_hpi, group = year)) +
+  geom_boxplot() 
 ```
 
-    ## Warning: `data_frame()` was deprecated in tibble 1.1.0.
-    ## Please use `tibble()` instead.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+    ## `summarise()` has grouped output by 'country'. You can override using the `.groups` argument.
 
-``` r
-ggplot(df, aes(x = x, y = y)) +
-  geom_point() +
-  geom_abline(aes(slope = -0.2,intercept = 3))
-```
+    ## Warning: Removed 87 rows containing non-finite values (stat_boxplot).
 
-![](Project_Research_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](Project_Research_files/figure-gfm/hpi%20years%20plot-1.png)<!-- -->
 
 ``` r
 hpi_middle_east <- filter(hpi_data, region == "Middle East", eco_footprint > 3)
@@ -299,17 +296,6 @@ ggplot(data = hpi_western_europe, aes(x = year, y = eco_footprint, colour = coun
 ![](Project_Research_files/figure-gfm/eco-analysis-western-europe-1.png)<!-- -->
 
 ``` r
-hpi_africa <- filter(hpi_data, region == "Africa")
-
-ggplot(data = hpi_africa, aes(x = year, y = eco_footprint, colour = country))+
-  geom_line()
-```
-
-    ## Warning: Removed 24 row(s) containing missing values (geom_path).
-
-![](Project_Research_files/figure-gfm/eco-analysis-africa-1.png)<!-- -->
-
-``` r
 target = c("Middle East", "Africa", "Western Europe")
 
 gdp_3 <- filter(hpi_data, region == target, year == 2019)
@@ -321,10 +307,31 @@ gdp_3 <- filter(hpi_data, region == target, year == 2019)
 ``` r
 ggplot(data = gdp_3, aes(x = country, y = gdp, fill = region, group = region))+
   geom_bar(stat = "identity") +
-  theme(axis.text.x = element_text(angle = 90))
+  theme(axis.text.x = element_text(angle = 90)) 
 ```
 
 ![](Project_Research_files/figure-gfm/eco-gdp-1.png)<!-- -->
+
+``` r
+hpi_data %>%
+  ggplot(aes(x = year, y = eco_footprint, group = year)) +
+  geom_violin() +
+  facet_wrap(~region)
+```
+
+    ## Warning: Removed 48 rows containing non-finite values (stat_ydensity).
+
+![](Project_Research_files/figure-gfm/eco%20ahhhhh-1.png)<!-- -->
+
+``` r
+hpi_data %>%
+  group_by(year) %>%
+  summarise(eco_avg = mean(eco_footprint, na.rm = TRUE)) %>%
+  ggplot(aes(x = year, y = eco_avg)) +
+  geom_col( )
+```
+
+![](Project_Research_files/figure-gfm/eco%20ahhhhh-2.png)<!-- -->
 
 From 2016 to 2019 most countries have an increasing or steady ecological
 footprint but from 2019 to 2020 we see a decline from virtually every
@@ -336,3 +343,13 @@ and lockdowns would have led to less resources being required thus
 lowering countries ecological footprint. Other reasons could be
 governments being more proactive about climate change but this would not
 explain how wide spread this decrease is.
+
+``` r
+hpi_data %>%
+  ggplot(aes(x = wellbeing, y = life_exp, size = pop_1000s, colour = region)) +
+  geom_point()
+```
+
+    ## Warning: Removed 81 rows containing missing values (geom_point).
+
+![](Project_Research_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
