@@ -304,6 +304,7 @@ anim_save("wellbeing graph 3.gif")
 ```
 
 ```{r wellbeing-life_exp plot, echo=FALSE}
+hpi_data_clean <- na.omit(hpi_data)
 graph1 <- hpi_data_clean %>% 
   ggplot(aes(x = wellbeing, y=life_exp, colour = region, 
              size = pop_1000s)) +     
