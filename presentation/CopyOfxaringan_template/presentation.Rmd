@@ -272,6 +272,7 @@ class: inverse, center, middle
 library(ggplot2)
 library(dplyr)
 library(ggthemes)
+library(gifski)
 graph3 <- hpi_data %>% 
   ggplot(aes(x = year, y = wellbeing, group = year)) +
   geom_violin(trim = FALSE) +
