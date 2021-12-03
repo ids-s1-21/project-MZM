@@ -37,6 +37,9 @@ looking at east asia and europe tells a different story where there seems to be 
 the opposite of what is expected. This is to be expected from a data set like this since 
 countries and regions vary wildly due to culture, politics, beliefs and much more.
 
+Well-being analysis 
+Overall, the graphs, shown in eight different regions, indicate that wellbeing measure in all regions are quite similar within each other throughout the years. Therefore, unlike ecological footprint, surprisingly, at least for me, we cannot say that COVID-19 has had a dramatic impact on people's well-being around the world. Looking deeper into the graphs, Western Europe and North America & Oceania show the highest measures of well-being. Whereas, Africa and South Asia exhibit lower well-being measures compared to the rest. Furthermore, the two characteristics that stand out from the graph are from North America & Oceania and South Asia. Countries in north America & Oceania display very little variation in there data resulting in a much shorter range compared to other regions. South Asia on the other hand, have quite a lot of differences between their well-being measures that produces this variety of violin figures. Specifically, in 2019 there is a clear drop in well-being. This comes from the low data entry of Afghanistan. The violin plot in 2020 goes back to it's average measure, however, this might be because Afghanistan does not have any data that year.
+
 Conclusion
 
 In conclusion we can see that there are many different factors that can affect the happiness,
